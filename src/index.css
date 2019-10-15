@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: whitesmoke;
 }
 
 code {
@@ -41,4 +42,8 @@ code {
 .flex-container-tab {
   display: flex;
   justify-content: center;
+}
+
+.paper {
+  margin: 5vh 15vw;
 }
