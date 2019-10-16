@@ -1,28 +1,12 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: "100%"
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    flexBasis: "33.33%",
-    flexShrink: 0
-  },
-  secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary
-  }
-}));
+import "./../index.css";
 
 export default function ControlledExpansionPanels(props) {
-  const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
   const handleChange = panel => (event, isExpanded) => {
@@ -30,7 +14,7 @@ export default function ControlledExpansionPanels(props) {
   };
 
   return (
-    <div className={classes.root}>
+    <div className="list">
       {props.content.map((el, index) => {
         return (
           <ExpansionPanel
@@ -39,13 +23,20 @@ export default function ControlledExpansionPanels(props) {
             key={index}
           >
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography className={classes.heading}>{el.header}</Typography>
-              <Typography className={classes.secondaryHeading}>
-                {el.price}
-              </Typography>
+              <div className="grid-container">
+                <h3 className="list-header">{el.header}</h3>
+                <h5 className="list-price">{el.price}</h5>
+              </div>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-              <Typography>{el.description}</Typography>
+              <div className="grid-container-expansion-panel">
+                <div className="purchase-info yellow-border">
+                  <p>Kr. 193,20</p>
+                  <p>Kan bestilles til alle butikker</p>
+                  <p>Post/på dør: kan bestilles</p>
+                </div>
+                <p className="yellow-border">{el.description}</p>
+              </div>
             </ExpansionPanelDetails>
           </ExpansionPanel>
         );
