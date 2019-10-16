@@ -15,13 +15,13 @@ export default function ControlledExpansionPanels(props) {
     setExpanded(isExpanded ? panel : false);
   };
 
-  function handleIncrement(ev) {
-    props.incrementCount(ev.currentTarget.dataset.div_id);
-    ev.preventDefault();
+  function handleIncrement(e) {
+    props.incrementCount(e.currentTarget.dataset.div_id);
+    e.preventDefault();
   }
 
   function handleDecrement(e) {
-    //props.decrementCount();
+    props.decrementCount(e.currentTarget.dataset.div_id);
     e.preventDefault();
   }
 
@@ -53,7 +53,8 @@ export default function ControlledExpansionPanels(props) {
                     variant="contained"
                     color="primary"
                     data-div_id={el.id}
-                    onClick={handleIncrement}
+                    onClick={handleDecrement}
+                    disabled={el.count === 0}
                   >
                     <RemoveIcon />
                   </IconButton>

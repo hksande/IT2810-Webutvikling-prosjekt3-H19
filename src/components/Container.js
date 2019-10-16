@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 
-import { incrementCount } from "./../actions/index";
+import { incrementCount, decrementCount } from "./../actions/index";
 
 import Paper from "@material-ui/core/Paper";
 import "./../index.css";
@@ -22,6 +22,9 @@ function mapDispatchToProps(dispatch) {
   return {
     incrementCount: id => {
       dispatch(incrementCount({ id }));
+    },
+    decrementCount: id => {
+      dispatch(decrementCount({ id }));
     }
   };
 }
@@ -37,7 +40,11 @@ function Container(props) {
       <Header />
       <Paper className="paper">
         <Tabs changeActiveTab={changeActiveTab} active={activeTab} />
-        <List content={props.drinks} incrementCount={props.incrementCount} />
+        <List
+          content={props.drinks}
+          incrementCount={props.incrementCount}
+          decrementCount={props.decrementCount}
+        />
       </Paper>
     </div>
   );
