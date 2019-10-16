@@ -1,5 +1,10 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+
+import { incrementCount } from "./../actions/index";
+
 import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
 import "./../index.css";
 
 import Tabs from "./Tabs";
@@ -13,11 +18,31 @@ const listContent = [
   { header: "Vodka", description: "Nam nam", price: 349 }
 ];
 
-export default function PaperSheet() {
+// To fetch state
+function mapStateToProps(state) {
+  return {
+    count: state.count.count
+  };
+}
+
+// To fetch actions to alter the state
+function mapDispatchToProps(dispatch) {
+  return {
+    incrementCount: () => {
+      dispatch(incrementCount());
+    }
+  };
+}
+
+function Container(props) {
   const [activeTab, setActiveTab] = useState("0");
 
   function changeActiveTab(active) {
     setActiveTab(active);
+  }
+
+  function handleClick() {
+    props.incrementCount();
   }
 
   return (
@@ -25,7 +50,16 @@ export default function PaperSheet() {
       <Paper className="paper">
         <Tabs changeActiveTab={changeActiveTab} active={activeTab} />
         <List content={listContent} />
+        <Button variant="contained" color="primary" onClick={handleClick}>
+          Increment
+        </Button>
+        <h2>{props.count}</h2>
       </Paper>
     </div>
   );
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Container);
