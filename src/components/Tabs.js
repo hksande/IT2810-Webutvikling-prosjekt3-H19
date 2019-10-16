@@ -1,12 +1,13 @@
 import React from "react";
 
+export default function Tab(props) {
+  function handleTabChange(e) {
+    props.changeActiveTab(e.target.name);
+  }
 
-export default function Tab(props){
-    function handleTabChange(e) {
-        props.changeActiveTab(e.target.name);
-      }
-      
   return (
+    <div>
+      {/*
     <div className="tab flex-container-tab">
       <button
         className={props.active === "0" ? "active tab" : "tab"}
@@ -21,7 +22,7 @@ export default function Tab(props){
         onClick={handleTabChange}
       >
         Mest kjøpte 
-      </button>
+      </button>*/}
     </div>
   );
 }

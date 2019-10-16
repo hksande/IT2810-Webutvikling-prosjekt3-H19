@@ -1,16 +1,29 @@
-import React from "react";
+import React, {useState} from "react";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import IconButton from "@material-ui/core/IconButton";
+import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
 import "./../index.css";
 
 export default function ControlledExpansionPanels(props) {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+
+  function handleIncrement(e) {
+    props.incrementCount(e.currentTarget.dataset.div_id);
+    e.preventDefault();
+  }
+
+  function handleDecrement(e) {
+    props.decrementCount(e.currentTarget.dataset.div_id);
+    e.preventDefault();
+  }
 
   return (
     <div className="list">
@@ -19,7 +32,7 @@ export default function ControlledExpansionPanels(props) {
           <ExpansionPanel
             expanded={expanded === index}
             onChange={handleChange(index)}
-            key={index}
+            key={el.id}
           >
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
               <div className="grid-container">
@@ -35,6 +48,26 @@ export default function ControlledExpansionPanels(props) {
                   <p>Post/på dør: kan bestilles</p>
                 </div>
                 <p className="yellow-border">{el.description}</p>
+                <div className="yellow-border add-to-cart">
+                  <IconButton
+                    variant="contained"
+                    color="primary"
+                    data-div_id={el.id}
+                    onClick={handleDecrement}
+                    disabled={el.count === 0}
+                  >
+                    <RemoveIcon />
+                  </IconButton>
+                  <h2>{el.count}</h2>
+                  <IconButton
+                    variant="contained"
+                    color="primary"
+                    data-div_id={el.id}
+                    onClick={handleIncrement}
+                  >
+                    <AddIcon />
+                  </IconButton>
+                </div>
               </div>
             </ExpansionPanelDetails>
           </ExpansionPanel>
