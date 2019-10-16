@@ -83,4 +83,10 @@ code {
   padding: 10px;
 }
 
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 2vh 0;
+}
+
 /*farge vinmonopolet: #F0F0DC*/

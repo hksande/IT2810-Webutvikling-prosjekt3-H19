@@ -9,6 +9,7 @@ import "./../index.css";
 
 import Tabs from "./Tabs";
 import List from "./List";
+import Header from "./Header";
 
 const listContent = [
   { header: "Rødvin", description: "Rund og mild", price: 179 },
@@ -41,12 +42,14 @@ function Container(props) {
     setActiveTab(active);
   }
 
-  function handleClick() {
+  function handleClick(e) {
     props.incrementCount();
+    e.preventDefault();
   }
 
   return (
     <div>
+      <Header />
       <Paper className="paper">
         <Tabs changeActiveTab={changeActiveTab} active={activeTab} />
         <List content={listContent} />
