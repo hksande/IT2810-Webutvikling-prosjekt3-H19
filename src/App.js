@@ -1,24 +1,16 @@
-
-import React, { useState, useEffect } from "react";
-import Tabs from "./components/Tabs";
+import React, { useState } from "react";
+import Container from "./components/Container";
 
 function App() {
-
   const [activeTab, setActiveTab] = useState("0");
 
-  
   function changeActiveTab(active) {
     setActiveTab(active);
   }
 
   return (
     <div className="App">
-      <h1>Vinmonopol</h1>
-      <Tabs
-          changeActiveTab={changeActiveTab}
-          active={activeTab}
-        />
-       
+      <Container />
     </div>
   );
 }
