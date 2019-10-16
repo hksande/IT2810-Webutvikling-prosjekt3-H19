@@ -6,8 +6,9 @@ export default function Tab(props) {
   }
 
   return (
-    <div className="tab flex-container-tab">
+    <div>
       {/*
+    <div className="tab flex-container-tab">
       <button
         className={props.active === "0" ? "active tab" : "tab"}
         name="0"

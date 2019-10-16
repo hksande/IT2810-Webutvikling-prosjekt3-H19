@@ -2,6 +2,7 @@ import { INCREMENT_COUNT, DECREMENT_COUNT } from "../constants/actionTypes";
 
 const countReducer = (
   state = {
+    count: 0,
     drinks: [
       {
         id: 1,
@@ -34,6 +35,7 @@ const countReducer = (
     case INCREMENT_COUNT:
       return {
         ...state,
+        count: state.count + 1,
         drinks: state.drinks.map(el => {
           if (action.payload.id === el.id.toString()) {
             return { ...el, count: el.count + 1 };
@@ -44,6 +46,7 @@ const countReducer = (
     case DECREMENT_COUNT:
       return {
         ...state,
+        count: state.count - 1,
         drinks: state.drinks.map(el => {
           if (action.payload.id === el.id.toString()) {
             return { ...el, count: el.count - 1 };

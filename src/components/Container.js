@@ -9,11 +9,13 @@ import "./../index.css";
 import Tabs from "./Tabs";
 import List from "./List";
 import Header from "./Header";
+import ShoppingDialog from "./ShoppingDialog";
 
 // To fetch state
 function mapStateToProps(state) {
   return {
-    drinks: state.count.drinks
+    drinks: state.count.drinks,
+    count: state.count.count
   };
 }
 
@@ -30,14 +32,23 @@ function mapDispatchToProps(dispatch) {
 }
 function Container(props) {
   const [activeTab, setActiveTab] = useState("0");
+  const [isDialogOpen, openDialog] = useState(false);
 
   function changeActiveTab(active) {
     setActiveTab(active);
   }
 
+  function closeDialog() {
+    openDialog(false);
+  }
+
+  function confirmPurchase() {
+    openDialog(false);
+  }
+
   return (
     <div>
-      <Header />
+      <Header count={props.count} openDialog={openDialog} />
       <Paper className="paper">
         <Tabs changeActiveTab={changeActiveTab} active={activeTab} />
         <List
@@ -46,6 +57,12 @@ function Container(props) {
           decrementCount={props.decrementCount}
         />
       </Paper>
+      <ShoppingDialog
+        open={isDialogOpen}
+        shoppingCart={props.drinks}
+        closeDialog={closeDialog}
+        confirm={confirmPurchase}
+      />
     </div>
   );
 }
