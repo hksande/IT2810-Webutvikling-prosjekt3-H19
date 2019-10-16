@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Paper from "@material-ui/core/Paper";
 import "./../index.css";
 
@@ -14,10 +14,16 @@ const listContent = [
 ];
 
 export default function PaperSheet() {
+  const [activeTab, setActiveTab] = useState("0");
+
+  function changeActiveTab(active) {
+    setActiveTab(active);
+  }
+
   return (
     <div>
       <Paper className="paper">
-        {/*<Tabs changeActiveTab={changeActiveTab} active={activeTab} />*/}
+        <Tabs changeActiveTab={changeActiveTab} active={activeTab} />
         <List content={listContent} />
       </Paper>
     </div>
