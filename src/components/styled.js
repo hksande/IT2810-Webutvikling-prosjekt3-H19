@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-const BORDER_STYLE = `0.2rem solid black`;
+const BORDER_STYLE = `0.1rem solid black`;
 const STROKE_COLOR = "#fff";
 
 export const Wrapper = styled.div`
   display: flex;
   flex-flow: nowrap row;
-  @media (max-width: 600px) {
+  @media (max-width: 800px) {
     flex-flow: nowrap column;
   }
 `;
@@ -14,8 +14,8 @@ export const Wrapper = styled.div`
 export const Output = styled.div`
   padding-right: 1rem;
   flex: 1 1 0;
-  border-right: ${BORDER_STYLE};
-  @media (max-width: 600px) {
+  flex-grow: 1;
+  @media (max-width: 800px) {
     padding-right: 0;
     padding-bottom: 1rem;
     border-right: none;
@@ -26,7 +26,8 @@ export const Output = styled.div`
 export const MapWrapper = styled.div`
   padding-left: 1rem;
   flex: 1 1 auto;
-  @media (max-width: 600px) {
+  flex-grow: 2;
+  @media (max-width: 800px) {
     padding-left: 0;
     padding-top: 1rem;
   }
