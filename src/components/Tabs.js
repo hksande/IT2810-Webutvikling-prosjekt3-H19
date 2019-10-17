@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import { mergeClasses } from '@material-ui/styles';
+import List from "./List";
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -38,7 +38,7 @@ function a11yProps(index) {
   };
 }
 
-export default function SimpleTabs() {
+export default function SimpleTabs(props) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -53,6 +53,16 @@ export default function SimpleTabs() {
           <Tab label="Mest kjøpte" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
+      <TabPanel value={value} index={0}>
+      <List
+          content={props.content}
+          incrementCount={props.incrementCount}
+          decrementCount={props.decrementCount}
+        />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        Item Two
+      </TabPanel>
     </div>
   );
 }
