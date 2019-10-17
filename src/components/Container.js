@@ -7,7 +7,6 @@ import Paper from "@material-ui/core/Paper";
 import "./../index.css";
 
 import Tabs from "./Tabs";
-import List from "./List";
 import Header from "./Header";
 import ShoppingDialog from "./ShoppingDialog";
 import ConfirmationSnackBar from "./ConfirmationSnackBar";
