@@ -96,4 +96,8 @@ code {
   align-items: center;
 }
 
+.map-list {
+  cursor: pointer;
+}
+
 /*farge vinmonopolet: #F0F0DC*/
