@@ -1,11 +1,9 @@
 import React from "react";
 
+import Container from "./components/Container";
+
 function App() {
-  return (
-    <div className="App">
-      <h1>Vinmonopol</h1>
-    </div>
-  );
+  return <Container />;
 }
 
 export default App;
