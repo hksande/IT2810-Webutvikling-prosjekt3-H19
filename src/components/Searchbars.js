@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     padding: '3px 4px',
     display: 'flex',
-    textAlign: 'center',
+    alignItems: 'center',
     width: 400,
     
 

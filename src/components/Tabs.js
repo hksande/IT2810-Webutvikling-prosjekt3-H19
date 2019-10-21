@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import List from "./List";
 import Searchbars from "./Searchbars"
+import Checkboxes from "./Checkboxes"
 
 
 function TabPanel(props) {
@@ -60,9 +61,10 @@ export default function SimpleTabs(props) {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <div className = "flex-container-tab">
+        <div className = "flex-container">
           <Searchbars/>
           </div>
+          <Checkboxes/>
         <br></br>
       <List
           content={props.content}
