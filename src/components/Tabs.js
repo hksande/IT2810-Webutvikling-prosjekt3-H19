@@ -6,9 +6,9 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import List from "./List";
-import Searchbars from "./Searchbars"
-import Checkboxes from "./Checkboxes"
-
+import Searchbars from "./Searchbars";
+import Checkboxes from "./Checkboxes";
+import HighlightLayer from "./Map";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -61,12 +61,12 @@ export default function SimpleTabs(props) {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <div className = "flex-container">
-          <Searchbars/>
-          </div>
-          <Checkboxes/>
+        <div className="flex-container">
+          <Searchbars />
+        </div>
+        <Checkboxes />
         <br></br>
-      <List
+        <List
           content={props.content}
           incrementCount={props.incrementCount}
           decrementCount={props.decrementCount}
