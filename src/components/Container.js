@@ -59,7 +59,13 @@ function Container(props) {
     <div>
       <Header count={props.count} openDialog={openDialog} />
       <Paper className="paper">
-        <Tabs changeActiveTab={changeActiveTab} active={activeTab} incrementCount= {props.incrementCount} content = {props.drinks} decrementCount = {props.decrementCount}/>
+        <Tabs
+          changeActiveTab={changeActiveTab}
+          active={activeTab}
+          incrementCount={props.incrementCount}
+          content={props.drinks}
+          decrementCount={props.decrementCount}
+        />
       </Paper>
       <ShoppingDialog
         open={isDialogOpen}
