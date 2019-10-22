@@ -7,15 +7,8 @@ import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import "./../index.css";
-import { connect } from "react-redux";
 
-function mapStateToProps(state) {
-  return {
-    drinks: state.count.drinks
-  };
-}
-
-function ControlledExpansionPanels(props) {
+export default function ControlledExpansionPanels(props) {
   const [expanded, setExpanded] = useState(false);
 
   const handleChange = panel => (event, isExpanded) => {
@@ -23,16 +16,14 @@ function ControlledExpansionPanels(props) {
   };
 
   function handleIncrement(e) {
-    props.incrementCount(e.currentTarget.dataset.div_id);
+    props.changeCount(e.currentTarget.dataset.div_id, 1);
     e.preventDefault();
   }
 
   function handleDecrement(e) {
-    props.decrementCount(e.currentTarget.dataset.div_id);
+    props.changeCount(e.currentTarget.dataset.div_id, -1);
     e.preventDefault();
   }
-
-  console.log(props);
 
   return (
     <div className="list">
@@ -63,7 +54,9 @@ function ControlledExpansionPanels(props) {
                     color="primary"
                     data-div_id={el.id}
                     onClick={handleDecrement}
-                    disabled={el.count === 0}
+                    disabled={
+                      !(el.id in props.drinks) || props.drinks[el.id] === 0
+                    }
                   >
                     <RemoveIcon />
                   </IconButton>
@@ -85,5 +78,3 @@ function ControlledExpansionPanels(props) {
     </div>
   );
 }
-
-export default connect(mapStateToProps)(ControlledExpansionPanels);

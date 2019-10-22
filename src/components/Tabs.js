@@ -66,10 +66,7 @@ export default function SimpleTabs(props) {
         </div>
         <Checkboxes />
         <br></br>
-        <ProductsContainer
-          incrementCount={props.incrementCount}
-          decrementCount={props.decrementCount}
-        />
+        <ProductsContainer changeCount={props.changeCount} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Map />

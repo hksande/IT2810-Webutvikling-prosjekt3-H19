@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 
-import { incrementCount, decrementCount, resetCount } from "./../actions/index";
+import { changeCount, resetCount } from "./../actions/index";
 
 import Paper from "@material-ui/core/Paper";
 import "./../index.css";
@@ -22,11 +22,8 @@ function mapStateToProps(state) {
 // To fetch actions to alter the state
 function mapDispatchToProps(dispatch) {
   return {
-    incrementCount: id => {
-      dispatch(incrementCount({ id }));
-    },
-    decrementCount: id => {
-      dispatch(decrementCount({ id }));
+    changeCount: (id, change) => {
+      dispatch(changeCount({ id, change }));
     },
     resetCount: () => {
       dispatch(resetCount());
@@ -62,18 +59,17 @@ function Container(props) {
         <Tabs
           changeActiveTab={changeActiveTab}
           active={activeTab}
-          incrementCount={props.incrementCount}
+          changeCount={props.changeCount}
           content={props.drinks}
-          decrementCount={props.decrementCount}
         />
       </Paper>
-      {/*}
+
       <ShoppingDialog
         open={isDialogOpen}
         shoppingCart={props.drinks}
         closeDialog={closeDialog}
         confirm={confirmPurchase}
-  />*/}
+      />
       <ConfirmationSnackBar
         open={isSnackBarOpen}
         message="Kjøp gjennomført!"

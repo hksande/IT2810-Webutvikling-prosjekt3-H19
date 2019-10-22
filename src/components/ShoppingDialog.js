@@ -14,18 +14,24 @@ export default function ShoppingDialog(props) {
       <DialogTitle>Handlekurv</DialogTitle>
       <DialogContent dividers>
         <List>
+          {/*}
           {props.shoppingCart.map(el => {
             return (
               <ListItem>
-                <ListItemText primary={el.header} secondary={el.count} />
+                <ListItemText primary={el.key()} secondary={el.item()} />
               </ListItem>
             );
-          })}
+          })}*/}
+          <p>{props.shoppingCart}</p>
         </List>
       </DialogContent>
       <DialogActions>
-        <Button color="primary" onClick={props.closeDialog}>Fortsett å handle</Button>
-        <Button color="primary" onClick={props.confirm}>Bekreft kjøp</Button>
+        <Button color="primary" onClick={props.closeDialog}>
+          Fortsett å handle
+        </Button>
+        <Button color="primary" onClick={props.confirm}>
+          Bekreft kjøp
+        </Button>
       </DialogActions>
     </Dialog>
   );
