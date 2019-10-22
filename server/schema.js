@@ -81,8 +81,8 @@ export const typeDefs = gql`
       description: String!
     ): Product!
     addProduct(name: String!, purchased: Int!): Product
-    removeProduct(name: String!): Product
-    updateProduct(data: ProductUpdateInput!, where: name!): Product
+    removeProduct(name: String!, purchased: Int!): Product
+    updateProduct(data: ProductUpdateInput!, where: String!): Product
   }
 `;
 
