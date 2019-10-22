@@ -52,10 +52,7 @@ export const typeDefs = gql`
       img: String!
       description: String!
     ): Product!
-    addProduct(
-      name: String!
-      purchased: Int!
-      ): Product
+    addProduct(name: String!, purchased: Int!): Product
     removeProduct(name: String!): Product
     updateProduct(data: ProductUpdateInput!, where: Int!): Product
   }
@@ -99,17 +96,21 @@ export const resolvers = {
         info
       );
     },
-    addProduct: (parent, args, context, info) => {
+    addProduct: async (parent, args, context, info) => {
       const data = await context.db.query.product({
-        where: {name: args.name}, info}
-      );
+        where: { name: args.name },
+        info
+      });
       return context.db.mutation.updateProduct(
         {
           data: {
             purchased: data.purchased + args.purchased
-        }, where: {
-           name: args.name }
-        }, info
+          },
+          where: {
+            name: args.name
+          }
+        },
+        info
       );
     }
   }
