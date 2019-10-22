@@ -31,6 +31,16 @@ export const typeDefs = gql`
     description: String!
   }
 
+  input ProductUpdateInput {
+    name: String
+    type: String
+    price: Int
+    purchased: Int
+    origin: String
+    img: String
+    description: String
+  }
+
   type Query {
     product(name: String!): Product
     products(
