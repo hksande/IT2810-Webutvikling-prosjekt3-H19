@@ -1,23 +1,14 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import Favorite from '@material-ui/icons/Favorite';
-import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
-
+import React from "react";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
 
 export default function Checkboxes() {
   const [state, setState] = React.useState({
-    checkedA: false,
-    checkedB: false,
-    checkedC: false,
-    checkedD: false,
-    
-
+    checked_rodvin: false,
+    checked_hvitvin: false,
+    checked_mussvin: false,
+    checked_ol: false
   });
 
   const handleChange = name => event => {
@@ -25,34 +16,47 @@ export default function Checkboxes() {
   };
 
   return (
-    
-      <FormGroup row>
-              <FormControlLabel
-                  control={
-                  <Checkbox checked={state.checkedA} onChange={handleChange('checkedA')} value="checkedA" />
-                  }
-                  label="Rødvin"
-              />
-              <FormControlLabel
-                  control={
-                  <Checkbox checked={state.checkedB} onChange={handleChange('checkedB')} value="checkedB" />
-                  }
-                  label="Hvitvin"
-              />
-              <FormControlLabel
-                  control={
-                  <Checkbox checked={state.checkedC} onChange={handleChange('checkedC')} value="checkedC" />
-                  }
-                  label="Musserende vin"
-              />
-              <FormControlLabel
-                  control={
-                  <Checkbox checked={state.checkedD} onChange={handleChange('checkedD')} value="checkedD" />
-                  }
-                  label="Øl"
-              />
-      </FormGroup>
-    
+    <FormGroup row>
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={state.checked_rodvin}
+            onChange={handleChange("checked_rodvin")}
+            value="checked_rodvin"
+          />
+        }
+        label="Rødvin"
+      />
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={state.checked_hvitvin}
+            onChange={handleChange("checked_hvitvin")}
+            value="checked_hvitvin"
+          />
+        }
+        label="Hvitvin"
+      />
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={state.checked_mussvin}
+            onChange={handleChange("checked_mussvin")}
+            value="checked_mussvin"
+          />
+        }
+        label="Musserende vin"
+      />
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={state.checked_ol}
+            onChange={handleChange("checked_ol")}
+            value="checked_ol"
+          />
+        }
+        label="Øl"
+      />
+    </FormGroup>
   );
 }
-    

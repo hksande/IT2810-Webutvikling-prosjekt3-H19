@@ -10,7 +10,6 @@ import Tabs from "./Tabs";
 import Header from "./Header";
 import ShoppingDialog from "./ShoppingDialog";
 import ConfirmationSnackBar from "./ConfirmationSnackBar";
-import Searchbars from "./Searchbars"
 
 // To fetch state
 function mapStateToProps(state) {
