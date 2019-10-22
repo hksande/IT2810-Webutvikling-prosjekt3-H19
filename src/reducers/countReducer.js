@@ -33,7 +33,7 @@ const defaultDrinks = [
 const countReducer = (
   state = {
     count: 0,
-    drinks: defaultDrinks
+    drinks: {}
   },
   action
 ) => {
@@ -50,16 +50,15 @@ const countReducer = (
         })
       };
     case INCREMENT_COUNT:
-      return {
-        ...state,
-        count: state.count + 1,
-        drinks: state.drinks.map(el => {
-          if (action.payload.id === el.id.toString()) {
-            return { ...el, count: el.count + 1 };
-          }
-          return el;
-        })
-      };
+      if (state.drinks[action.payload.id]) {
+        const newCount = {};
+        newCount[action.payload.id] = state.drinks[action.payload.id] + 1;
+        return { ...state, drinks: { ...state.drinks, ...newCount } };
+      } else {
+        const newCount = {};
+        newCount[action.payload.id] = 1;
+        return { ...state, drinks: { ...state.drinks, ...newCount } };
+      }
     case RESET_COUNT:
       return {
         count: 0,

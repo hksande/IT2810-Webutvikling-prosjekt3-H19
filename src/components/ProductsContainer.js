@@ -19,7 +19,9 @@ const GET_PRODUCTS = gql`
 `;
 
 export default function ProductsContainer(props) {
-  const { loading, error, data } = useQuery(GET_PRODUCTS);
+  const { loading, error, data } = useQuery(GET_PRODUCTS, {
+    variables: {}
+  });
 
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;

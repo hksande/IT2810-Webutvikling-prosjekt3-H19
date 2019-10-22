@@ -67,12 +67,13 @@ function Container(props) {
           decrementCount={props.decrementCount}
         />
       </Paper>
+      {/*}
       <ShoppingDialog
         open={isDialogOpen}
         shoppingCart={props.drinks}
         closeDialog={closeDialog}
         confirm={confirmPurchase}
-      />
+  />*/}
       <ConfirmationSnackBar
         open={isSnackBarOpen}
         message="Kjøp gjennomført!"
