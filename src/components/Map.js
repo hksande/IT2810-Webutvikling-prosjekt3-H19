@@ -19,7 +19,7 @@ const StyledMap = styled(MapWrapper)`
   }
 `;
 
-export default class HighlightLayer extends Component {
+export default class Map extends Component {
   constructor(props) {
     super(props);
 
@@ -76,7 +76,7 @@ export default class HighlightLayer extends Component {
   }
 }
 
-HighlightLayer.propTypes = {
+Map.propTypes = {
   map: PropTypes.shape({
     id: PropTypes.string.isRequired,
     viewBox: PropTypes.string.isRequired,
