@@ -13,7 +13,7 @@ const server = new ApolloServer({
   context: req => ({
     ...req,
     db: new Prisma({
-      typeDefs: "database/generated/prisma.graphql", //Prismas auto-generated schema
+      typeDefs: "database/generated/prisma.graphql", //Prismas auto-generated schema. Not actually used, but we have borrowed some typeDefs
       endpoint: "http://localhost:4466",
       debug: true //log all GraphQL queries & mutations
     })
