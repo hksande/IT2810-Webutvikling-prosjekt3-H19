@@ -1,6 +1,25 @@
 import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
+  enum ProductOrderByInput {
+    id_ASC
+    id_DESC
+    name_ASC
+    name_DESC
+    type_ASC
+    type_DESC
+    price_ASC
+    price_DESC
+    purchased_ASC
+    purchased_DESC
+    origin_ASC
+    origin_DESC
+    img_ASC
+    img_DESC
+    description_ASC
+    description_DESC
+  }
+
   type Product {
     id: ID!
     name: String!
@@ -14,6 +33,13 @@ export const typeDefs = gql`
 
   type Query {
     product(name: String!): Product
+    products(
+      searchString: String
+      type: String
+      orderBy: ProductOrderByInput
+      offset: Int
+      limit: Int
+    ): [Product]!
   }
 
   type Mutation {
@@ -41,8 +67,17 @@ export const resolvers = {
         },
         info
       );
+    },
+    products: (parent, args, context, info) => {
+      return context.db.query.products(
+        {
+          where: { type: args.type }
+        },
+        info
+      );
     }
   },
+
   Mutation: {
     createProduct: (parent, args, context, info) => {
       return context.db.mutation.createProduct(
