@@ -1,6 +1,24 @@
 import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
+  directive @constraint(
+    # String constraints
+    minLength: Int
+    maxLength: Int
+    startsWith: String
+    endsWith: String
+    notContains: String
+    pattern: String
+    format: String
+
+    # Number constraints
+    min: Int
+    max: Int
+    exclusiveMin: Int
+    exclusiveMax: Int
+    multipleOf: Int
+  ) on INPUT_FIELD_DEFINITION
+
   enum ProductOrderByInput {
     id_ASC
     id_DESC
@@ -64,7 +82,7 @@ export const typeDefs = gql`
     ): Product!
     addProduct(name: String!, purchased: Int!): Product
     removeProduct(name: String!): Product
-    updateProduct(data: ProductUpdateInput!, where: Int!): Product
+    updateProduct(data: ProductUpdateInput!, where: name!): Product
   }
 `;
 
@@ -115,6 +133,23 @@ export const resolvers = {
         {
           data: {
             purchased: data.purchased + args.purchased
+          },
+          where: {
+            name: args.name
+          }
+        },
+        info
+      );
+    },
+    removeProduct: async (parent, args, context, info) => {
+      const data = await context.db.query.product({
+        where: { name: args.name },
+        info
+      });
+      return context.db.mutation.updateProduct(
+        {
+          data: {
+            purchased: data.purchased - args.purchased
           },
           where: {
             name: args.name
