@@ -9,20 +9,22 @@ import Button from "@material-ui/core/Button";
 import React from "react";
 
 export default function ShoppingDialog(props) {
+  console.log(props.shoppingCart);
   return (
     <Dialog width="md" fullWidth open={props.open}>
       <DialogTitle>Handlekurv</DialogTitle>
       <DialogContent dividers>
         <List>
-          {/*}
-          {props.shoppingCart.map(el => {
+          {Object.keys(props.shoppingCart).map(function(key, index) {
             return (
               <ListItem>
-                <ListItemText primary={el.key()} secondary={el.item()} />
+                <ListItemText
+                  primary={key}
+                  secondary={props.shoppingCart[key]}
+                />
               </ListItem>
             );
-          })}*/}
-          <p>{props.shoppingCart}</p>
+          })}
         </List>
       </DialogContent>
       <DialogActions>

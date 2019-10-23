@@ -32,7 +32,7 @@ function mapDispatchToProps(dispatch) {
 }
 function Container(props) {
   const [activeTab, setActiveTab] = useState("0");
-  const [isDialogOpen, openDialog] = useState(false);
+  const [isDialogOpen, setDialogOpen] = useState(false);
   const [isSnackBarOpen, setSnackBar] = useState(false);
 
   function changeActiveTab(active) {
@@ -41,16 +41,22 @@ function Container(props) {
 
   //Closes shopping cart dialog
   function closeDialog() {
-    openDialog(false);
+    setDialogOpen(false);
   }
 
   //Closes shopping cart dialog, confirms purchase, and resets shopping cart
   function confirmPurchase() {
-    openDialog(false);
+    setDialogOpen(false);
     //TODO: Send mutation to db to update purchase history
     props.resetCount();
     setSnackBar(true);
   }
+
+  function openDialog() {
+    setDialogOpen(true);
+  }
+
+  console.log("dialog open? ", isDialogOpen);
 
   return (
     <div>

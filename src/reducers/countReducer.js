@@ -13,11 +13,19 @@ const countReducer = (
         const newCount = {};
         newCount[action.payload.id] =
           state.drinks[action.payload.id] + action.payload.change;
-        return { ...state, drinks: { ...state.drinks, ...newCount } };
+        return {
+          ...state,
+          drinks: { ...state.drinks, ...newCount },
+          count: state.count + +action.payload.change
+        };
       } else {
         const newCount = {};
         newCount[action.payload.id] = 1;
-        return { ...state, drinks: { ...state.drinks, ...newCount } };
+        return {
+          ...state,
+          drinks: { ...state.drinks, ...newCount },
+          count: state.count + +action.payload.change
+        };
       }
     case RESET_COUNT:
       return {
