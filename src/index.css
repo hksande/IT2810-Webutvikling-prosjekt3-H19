@@ -111,6 +111,11 @@ code {
 
 .map-list {
   cursor: pointer;
+  line-height: 2;
+}
+
+ol li:hover {
+  color: #d52484;
 }
 
 .image {
