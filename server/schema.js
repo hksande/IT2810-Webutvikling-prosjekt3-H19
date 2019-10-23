@@ -61,7 +61,7 @@ export const typeDefs = gql`
 
   type Query {
     product(name: String!): Product
-    products(
+    getProducts(
       searchString: String
       type: String
       orderBy: ProductOrderByInput
@@ -97,13 +97,20 @@ export const resolvers = {
         info
       );
     },
-    products: (parent, args, context, info) => {
-      return context.db.query.products(
+    getProducts: async (parent, args, context, info) => {
+      const search = args.searchString
+        ? {
+            name_contains: args.searchString
+          }
+        : {};
+      const data = await context.db.query.products(
         {
-          where: { type: args.type }
+          search,
+          type: args.type
         },
         info
       );
+      return data;
     }
   },
 
