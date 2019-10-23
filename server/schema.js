@@ -1,6 +1,24 @@
 import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
+  directive @constraint(
+    # String constraints
+    minLength: Int
+    maxLength: Int
+    startsWith: String
+    endsWith: String
+    notContains: String
+    pattern: String
+    format: String
+
+    # Number constraints
+    min: Int
+    max: Int
+    exclusiveMin: Int
+    exclusiveMax: Int
+    multipleOf: Int
+  ) on INPUT_FIELD_DEFINITION
+
   enum ProductOrderByInput {
     id_ASC
     id_DESC
@@ -31,9 +49,14 @@ export const typeDefs = gql`
     description: String!
   }
 
+  input ProductUpdateInput {
+    name: String!
+    purchased: Int
+  }
+
   type Query {
     product(name: String!): Product
-    products(
+    getProducts(
       searchString: String
       type: String
       orderBy: ProductOrderByInput
@@ -52,8 +75,7 @@ export const typeDefs = gql`
       img: String!
       description: String!
     ): Product!
-    addProduct(name: String!): Product
-    removeProduct(name: String!): Product
+    addPurchase(name: String!, purchased: Int!): Product
   }
 `;
 
@@ -68,13 +90,21 @@ export const resolvers = {
         info
       );
     },
-    products: (parent, args, context, info) => {
-      return context.db.query.products(
+    getProducts: async (parent, args, context, info) => {
+      const search = args.searchString
+        ? {
+            name_contains: args.searchString
+          }
+        : {};
+      const data = await context.db.query.products(
         {
-          where: { type: args.type }
+          search,
+          name,
+          type: args.type
         },
         info
       );
+      return data;
     }
   },
 
@@ -94,7 +124,23 @@ export const resolvers = {
         },
         info
       );
+    },
+    addPurchase: async (parent, args, context, info) => {
+      const data = await context.db.query.product({
+        where: { name: args.name },
+        info
+      });
+      return context.db.mutation.updateProduct(
+        {
+          data: {
+            purchased: data.purchased + args.purchased
+          },
+          where: {
+            name: args.name
+          }
+        },
+        info
+      );
     }
-    //updateProduct
   }
 };
