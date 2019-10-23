@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 
-import { incrementCount, decrementCount, resetCount } from "./../actions/index";
+import { changeCount, resetCount } from "./../actions/index";
 
 import Paper from "@material-ui/core/Paper";
 import "./../index.css";
@@ -22,11 +22,8 @@ function mapStateToProps(state) {
 // To fetch actions to alter the state
 function mapDispatchToProps(dispatch) {
   return {
-    incrementCount: id => {
-      dispatch(incrementCount({ id }));
-    },
-    decrementCount: id => {
-      dispatch(decrementCount({ id }));
+    changeCount: (name, change) => {
+      dispatch(changeCount({ name, change }));
     },
     resetCount: () => {
       dispatch(resetCount());
@@ -35,7 +32,7 @@ function mapDispatchToProps(dispatch) {
 }
 function Container(props) {
   const [activeTab, setActiveTab] = useState("0");
-  const [isDialogOpen, openDialog] = useState(false);
+  const [isDialogOpen, setDialogOpen] = useState(false);
   const [isSnackBarOpen, setSnackBar] = useState(false);
 
   function changeActiveTab(active) {
@@ -44,15 +41,19 @@ function Container(props) {
 
   //Closes shopping cart dialog
   function closeDialog() {
-    openDialog(false);
+    setDialogOpen(false);
   }
 
   //Closes shopping cart dialog, confirms purchase, and resets shopping cart
   function confirmPurchase() {
-    openDialog(false);
+    setDialogOpen(false);
     //TODO: Send mutation to db to update purchase history
     props.resetCount();
     setSnackBar(true);
+  }
+
+  function openDialog() {
+    setDialogOpen(true);
   }
 
   return (
@@ -62,11 +63,11 @@ function Container(props) {
         <Tabs
           changeActiveTab={changeActiveTab}
           active={activeTab}
-          incrementCount={props.incrementCount}
+          changeCount={props.changeCount}
           content={props.drinks}
-          decrementCount={props.decrementCount}
         />
       </Paper>
+
       <ShoppingDialog
         open={isDialogOpen}
         shoppingCart={props.drinks}
