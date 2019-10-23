@@ -4,8 +4,36 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import "./../index.css";
-
 import { Wrapper, Output, MapWrapper } from "./styled";
+
+const countryMap = {
+  Italy: "it",
+  England: "gb",
+  Frankrike: "fr",
+  Hellas: "gr",
+  NewZealand: "nz", //Fix
+  Australia: "au",
+  Spania: "es",
+  SørAfrika: "za", //Fix
+  Sverige: "se",
+  Portugal: "pt",
+  USA: "us",
+  Argentina: "ar",
+  Chile: "cl",
+  Norge: "no",
+  Tyskland: "de",
+  Belgia: "be",
+  Polen: "pl",
+  Østerrike: "at",
+  Danmark: "dk",
+  Kina: "cn",
+  Japan: "jp",
+  Island: "is",
+  Russland: "ru",
+  Libanon: "lb",
+  Tsjekkia: "cz",
+  Skottland: "gb"
+};
 
 const StyledMap = styled(MapWrapper)`
   svg {
@@ -34,7 +62,8 @@ export default class Map extends Component {
 
   render() {
     const { current } = this.state;
-
+    const top = this.props.data.products.slice(0, 10);
+    console.log(top);
     return (
       <div>
         <h2>Topp 10 mest kjøpte varer</h2>
@@ -46,26 +75,19 @@ export default class Map extends Component {
                 Hold musen over navnene for å se hvilket land varene er fra:
               </strong>
             </p>
-            <ul className="map-list">
-              <li
-                onMouseEnter={() => this.setCurrent("it")}
-                onMouseLeave={() => this.clearCurrent()}
-              >
-                <code>Monchiero Carbone Regret Langhe Nebbiolo</code>
-              </li>
-              <li
-                onMouseEnter={() => this.setCurrent("gb")}
-                onMouseLeave={() => this.clearCurrent()}
-              >
-                <code>Adams New England IPA</code>
-              </li>
-              <li
-                onMouseEnter={() => this.setCurrent("fr")}
-                onMouseLeave={() => this.clearCurrent()}
-              >
-                <code>Ch. Fougas Forces de Vies Premium 2014</code>
-              </li>
-            </ul>
+            <ol className="map-list">
+              {top.map(el => {
+                return (
+                  <li
+                    onMouseEnter={() => this.setCurrent(countryMap[el.origin])}
+                    onMouseLeave={() => this.clearCurrent()}
+                    key={el.name}
+                  >
+                    <code>{el.name}</code>
+                  </li>
+                );
+              })}
+            </ol>
           </Output>
           <StyledMap>
             <VectorMap {...world} currentLayers={current} />

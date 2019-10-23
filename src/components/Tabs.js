@@ -7,8 +7,9 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Searchbar from "./Searchbar";
 import Checkboxes from "./Checkboxes";
-import Map from "./Map";
 import ProductsContainer from "./ProductsContainer";
+import TopProductsContainer from "./TopProductsContainer";
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -69,7 +70,7 @@ export default function SimpleTabs(props) {
         <ProductsContainer changeCount={props.changeCount} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Map />
+        <TopProductsContainer />
       </TabPanel>
     </div>
   );
