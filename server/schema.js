@@ -90,21 +90,13 @@ export const resolvers = {
         info
       );
     },
-    products: async (parent, args, context, info) => {
-      const search = args.searchString
-        ? {
-            name_contains: args.searchString
-          }
-        : {};
-      const data = await context.db.query.products(
+    products: (parent, args, context, info) => {
+      return context.db.query.products(
         {
-          search,
-          name,
-          type: args.type
+          where: { type: args.type }
         },
         info
       );
-      return data;
     }
   },
 
