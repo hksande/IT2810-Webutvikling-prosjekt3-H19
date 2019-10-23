@@ -50,13 +50,8 @@ export const typeDefs = gql`
   }
 
   input ProductUpdateInput {
-    name: String
-    type: String
-    price: Int
+    name: String!
     purchased: Int
-    origin: String
-    img: String
-    description: String
   }
 
   type Query {
@@ -80,9 +75,7 @@ export const typeDefs = gql`
       img: String!
       description: String!
     ): Product!
-    addProduct(name: String!, purchased: Int!): Product
-    removeProduct(name: String!, purchased: Int!): Product
-    updateProduct(data: ProductUpdateInput!, where: String!): Product
+    addPurchase(name: String!, purchased: Int!): Product
   }
 `;
 
@@ -132,7 +125,7 @@ export const resolvers = {
         info
       );
     },
-    addProduct: async (parent, args, context, info) => {
+    addPurchase: async (parent, args, context, info) => {
       const data = await context.db.query.product({
         where: { name: args.name },
         info
@@ -141,23 +134,6 @@ export const resolvers = {
         {
           data: {
             purchased: data.purchased + args.purchased
-          },
-          where: {
-            name: args.name
-          }
-        },
-        info
-      );
-    },
-    removeProduct: async (parent, args, context, info) => {
-      const data = await context.db.query.product({
-        where: { name: args.name },
-        info
-      });
-      return context.db.mutation.updateProduct(
-        {
-          data: {
-            purchased: data.purchased - args.purchased
           },
           where: {
             name: args.name
