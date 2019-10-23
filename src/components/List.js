@@ -35,17 +35,15 @@ export default function ControlledExpansionPanels(props) {
             key={el.name}
           >
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <div className="grid-container">
-                <h3 className="list-header">{el.name}</h3>
-                <h5 className="list-price">{el.price}</h5>
+              <div className="grid-containerflex-header">
+                  <h3 className="list-header">{el.name}</h3>
+                  <h5 className="list-price">{el.price} kr</h5>
               </div>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               <div className="grid-container-expansion-panel">
                 <div className="purchase-info yellow-border">
-                  <p>{el.price}</p>
-                  <p>Kan bestilles til alle butikker</p>
-                  <p>Post/på dør: kan bestilles</p>
+                    <img src = {el.img} className = "image"></img>
                 </div>
                 <p className="yellow-border">{el.description}</p>
                 <div className="yellow-border add-to-cart">
