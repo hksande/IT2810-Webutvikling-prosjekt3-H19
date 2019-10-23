@@ -1,9 +1,14 @@
-import { CHANGE_COUNT, RESET_COUNT } from "../constants/actionTypes";
+import {
+  CHANGE_COUNT,
+  RESET_COUNT,
+  SET_ORDER_BY
+} from "../constants/actionTypes";
 
 const countReducer = (
   state = {
     count: 0,
-    drinks: {}
+    drinks: {},
+    orderBy: null
   },
   action
 ) => {
@@ -32,6 +37,8 @@ const countReducer = (
         count: 0,
         drinks: {}
       };
+    case SET_ORDER_BY:
+      return { ...state, orderBy: action.payload.orderBy };
     default:
       return state;
   }

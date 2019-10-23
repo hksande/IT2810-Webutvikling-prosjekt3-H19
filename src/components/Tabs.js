@@ -9,7 +9,7 @@ import Searchbar from "./Searchbar";
 import Checkboxes from "./Checkboxes";
 import ProductsContainer from "./ProductsContainer";
 import TopProductsContainer from "./TopProductsContainer";
-
+import FilterMenu from "./FilterMenu";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -27,6 +27,7 @@ function TabPanel(props) {
     </Typography>
   );
 }
+
 
 TabPanel.propTypes = {
   children: PropTypes.node,
@@ -66,6 +67,7 @@ export default function SimpleTabs(props) {
           <Searchbar />
         </div>
         <Checkboxes />
+        <FilterMenu />
         <br></br>
         <ProductsContainer changeCount={props.changeCount} />
       </TabPanel>

@@ -22,14 +22,13 @@ const query = gql`
 
 function mapStateToProps(state) {
   return {
-    drinks: state.count.drinks
+    drinks: state.count.drinks,
+    orderBy: state.count.orderBy
   };
 }
 
 function ProductsContainer(props) {
-
-  const filter = "price_DESC";
-  const variables = filter === null ? {} : { orderBy: filter };
+  const variables = props.orderBy === null ? {} : { orderBy: props.orderBy };
 
   const { data, loading, error } = useQuery(query, {
     variables: variables
