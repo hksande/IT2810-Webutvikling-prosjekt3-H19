@@ -56,13 +56,14 @@ export const typeDefs = gql`
 
   type Query {
     product(name: String!): Product
-    products(
+    getProductsByType(
       searchString: String
       type: String
       orderBy: ProductOrderByInput
       offset: Int
       limit: Int
     ): [Product]!
+    allProducts(searchString: String, orderBy: ProductOrderByInput): [Product]!
   }
 
   type Mutation {
@@ -90,13 +91,31 @@ export const resolvers = {
         info
       );
     },
-    products: (parent, args, context, info) => {
-      return context.db.query.products(
+    getProductsByType: async (parent, args, context, info) => {
+      const where = args.searchString
+        ? { name_contains: args.searchString, type: args.type }
+        : { type: args.type };
+      const data = await context.db.query.products(
         {
-          where: { type: args.type }
+          where,
+          orderBy: args.orderBy
         },
         info
       );
+      return data;
+    },
+    allProducts: async (parent, args, context, info) => {
+      const where = args.searchString
+        ? { name_contains: args.searchString }
+        : {};
+      const data = await context.db.query.products(
+        {
+          where,
+          orderBy: args.orderBy
+        },
+        info
+      );
+      return data;
     }
   },
 
