@@ -79,6 +79,7 @@ export default class Map extends Component {
               {top.map(el => {
                 return (
                   <li
+                    className="list-item"
                     onMouseEnter={() => this.setCurrent(countryMap[el.origin])}
                     onMouseLeave={() => this.clearCurrent()}
                     key={el.name}
