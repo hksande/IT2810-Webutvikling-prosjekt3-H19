@@ -16,7 +16,7 @@ const GET_TOP_PRODUCTS = gql`
 
 function mapStateToProps(state) {
   return {
-    drinks: state.count.drinks
+    drinks: state.products.drinks
   };
 }
 

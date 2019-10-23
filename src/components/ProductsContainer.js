@@ -4,9 +4,9 @@ import React from "react";
 import List from "./List";
 import { connect } from "react-redux";
 
-const GET_PRODUCTS = gql`
-  {
-    products {
+const query = gql`
+  query products($orderBy: ProductOrderByInput) {
+    products(orderBy: $orderBy) {
       name
       id
       type
@@ -21,13 +21,17 @@ const GET_PRODUCTS = gql`
 
 function mapStateToProps(state) {
   return {
-    drinks: state.count.drinks
+    drinks: state.products.drinks,
+    orderBy: state.products.orderBy,
+    searchString: state.products.searchString
   };
 }
 
 function ProductsContainer(props) {
-  const { loading, error, data } = useQuery(GET_PRODUCTS, {
-    variables: {}
+  const variables = props.orderBy === null ? {} : { orderBy: props.orderBy };
+
+  const { data, loading, error } = useQuery(query, {
+    variables: variables
   });
 
   if (loading) return "Loading...";

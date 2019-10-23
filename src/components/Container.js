@@ -14,8 +14,8 @@ import ConfirmationSnackBar from "./ConfirmationSnackBar";
 // To fetch state
 function mapStateToProps(state) {
   return {
-    drinks: state.count.drinks,
-    count: state.count.count
+    drinks: state.products.drinks,
+    count: state.products.count
   };
 }
 
