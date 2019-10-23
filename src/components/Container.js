@@ -22,8 +22,8 @@ function mapStateToProps(state) {
 // To fetch actions to alter the state
 function mapDispatchToProps(dispatch) {
   return {
-    changeCount: (id, change) => {
-      dispatch(changeCount({ id, change }));
+    changeCount: (name, change) => {
+      dispatch(changeCount({ name, change }));
     },
     resetCount: () => {
       dispatch(resetCount());
@@ -55,8 +55,6 @@ function Container(props) {
   function openDialog() {
     setDialogOpen(true);
   }
-
-  console.log("dialog open? ", isDialogOpen);
 
   return (
     <div>

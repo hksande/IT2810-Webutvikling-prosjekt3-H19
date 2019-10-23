@@ -61,7 +61,7 @@ export default function SimpleTabs(props) {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <div className="flex-container">
+        <div className="flex-container-center">
           <Searchbar />
         </div>
         <Checkboxes />

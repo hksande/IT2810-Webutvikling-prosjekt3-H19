@@ -16,12 +16,12 @@ export default function ControlledExpansionPanels(props) {
   };
 
   function handleIncrement(e) {
-    props.changeCount(e.currentTarget.dataset.div_id, 1);
+    props.changeCount(e.currentTarget.dataset.div_name, 1);
     e.preventDefault();
   }
 
   function handleDecrement(e) {
-    props.changeCount(e.currentTarget.dataset.div_id, -1);
+    props.changeCount(e.currentTarget.dataset.div_name, -1);
     e.preventDefault();
   }
 
@@ -32,7 +32,7 @@ export default function ControlledExpansionPanels(props) {
           <ExpansionPanel
             expanded={expanded === index}
             onChange={handleChange(index)}
-            key={el.id}
+            key={el.name}
           >
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
               <div className="grid-container">
@@ -52,19 +52,19 @@ export default function ControlledExpansionPanels(props) {
                   <IconButton
                     variant="contained"
                     color="primary"
-                    data-div_id={el.id}
+                    data-div_name={el.name}
                     onClick={handleDecrement}
                     disabled={
-                      !(el.id in props.drinks) || props.drinks[el.id] === 0
+                      !(el.name in props.drinks) || props.drinks[el.name] === 0
                     }
                   >
                     <RemoveIcon />
                   </IconButton>
-                  <h2>{el.id in props.drinks ? props.drinks[el.id] : 0}</h2>
+                  <h2>{el.name in props.drinks ? props.drinks[el.name] : 0}</h2>
                   <IconButton
                     variant="contained"
                     color="primary"
-                    data-div_id={el.id}
+                    data-div_name={el.name}
                     onClick={handleIncrement}
                   >
                     <AddIcon />

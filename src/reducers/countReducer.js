@@ -9,10 +9,10 @@ const countReducer = (
 ) => {
   switch (action.type) {
     case CHANGE_COUNT:
-      if (state.drinks[action.payload.id]) {
+      if (state.drinks[action.payload.name]) {
         const newCount = {};
-        newCount[action.payload.id] =
-          state.drinks[action.payload.id] + action.payload.change;
+        newCount[action.payload.name] =
+          state.drinks[action.payload.name] + action.payload.change;
         return {
           ...state,
           drinks: { ...state.drinks, ...newCount },
@@ -20,7 +20,7 @@ const countReducer = (
         };
       } else {
         const newCount = {};
-        newCount[action.payload.id] = 1;
+        newCount[action.payload.name] = 1;
         return {
           ...state,
           drinks: { ...state.drinks, ...newCount },
