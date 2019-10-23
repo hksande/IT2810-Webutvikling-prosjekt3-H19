@@ -56,7 +56,7 @@ export const typeDefs = gql`
 
   type Query {
     product(name: String!): Product
-    getProducts(
+    products(
       searchString: String
       type: String
       orderBy: ProductOrderByInput
@@ -90,7 +90,7 @@ export const resolvers = {
         info
       );
     },
-    getProducts: async (parent, args, context, info) => {
+    products: async (parent, args, context, info) => {
       const search = args.searchString
         ? {
             name_contains: args.searchString

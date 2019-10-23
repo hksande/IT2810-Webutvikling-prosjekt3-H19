@@ -9,7 +9,11 @@ import { Provider } from "react-redux";
 import store from "./store/configureStore";
 
 const client = new ApolloClient({
-  uri: "http://it2810-24.idi.ntnu.no:5000/graphql"
+  uri: "http://it2810-24.idi.ntnu.no:5000/graphql",
+  onError: ({ networkError, graphQLErrors }) => {
+    console.log("graphQLErrors", graphQLErrors);
+    console.log("networkError", networkError);
+  }
 });
 
 ReactDOM.render(
