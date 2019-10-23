@@ -106,6 +106,7 @@ export const resolvers = {
       const data = await context.db.query.products(
         {
           search,
+          name,
           type: args.type
         },
         info
