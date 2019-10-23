@@ -42,10 +42,9 @@ code {
 .flex-container-center {
   display: flex;
   justify-content: center;
-  
 }
 
-.flex-header{
+.flex-header {
   display: flex;
   justify-content: center;
 }
@@ -114,15 +113,15 @@ code {
   cursor: pointer;
 }
 
-.image{
+.image {
   width: 55px;
   height: 150px;
-  
+}
+
 .flex-container-space-between {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
-
 
 /*farge vinmonopolet: #F0F0DC*/
