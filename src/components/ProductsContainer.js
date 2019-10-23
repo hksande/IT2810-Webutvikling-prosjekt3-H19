@@ -3,10 +3,11 @@ import { useQuery } from "@apollo/react-hooks";
 import React from "react";
 import List from "./List";
 import { connect } from "react-redux";
+import { client } from "./../apolloClient";
 
-const GET_PRODUCTS = gql`
-  {
-    products {
+const query = gql`
+  query products($orderBy: ProductOrderByInput) {
+    products(orderBy: $orderBy) {
       name
       id
       type
@@ -26,8 +27,12 @@ function mapStateToProps(state) {
 }
 
 function ProductsContainer(props) {
-  const { loading, error, data } = useQuery(GET_PRODUCTS, {
-    variables: {}
+
+  const filter = "price_DESC";
+  const variables = filter === null ? {} : { orderBy: filter };
+
+  const { data, loading, error } = useQuery(query, {
+    variables: variables
   });
 
   if (loading) return "Loading...";
