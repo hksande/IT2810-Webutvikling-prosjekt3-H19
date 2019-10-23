@@ -3,7 +3,6 @@ import { useQuery } from "@apollo/react-hooks";
 import React from "react";
 import List from "./List";
 import { connect } from "react-redux";
-import { client } from "./../apolloClient";
 
 const query = gql`
   query products($orderBy: ProductOrderByInput) {
@@ -22,8 +21,9 @@ const query = gql`
 
 function mapStateToProps(state) {
   return {
-    drinks: state.count.drinks,
-    orderBy: state.count.orderBy
+    drinks: state.products.drinks,
+    orderBy: state.products.orderBy,
+    searchString: state.products.searchString
   };
 }
 

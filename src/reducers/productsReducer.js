@@ -1,14 +1,16 @@
 import {
   CHANGE_COUNT,
   RESET_COUNT,
-  SET_ORDER_BY
+  SET_ORDER_BY,
+  SET_SEARCH
 } from "../constants/actionTypes";
 
-const countReducer = (
+const productsReducer = (
   state = {
     count: 0,
     drinks: {},
-    orderBy: null
+    orderBy: null,
+    searchString: null
   },
   action
 ) => {
@@ -39,9 +41,11 @@ const countReducer = (
       };
     case SET_ORDER_BY:
       return { ...state, orderBy: action.payload.orderBy };
+    case SET_SEARCH:
+      return { ...state, searchString: action.payload.searchString };
     default:
       return state;
   }
 };
 
-export default countReducer;
+export default productsReducer;

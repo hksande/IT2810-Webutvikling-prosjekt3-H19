@@ -4,6 +4,16 @@ import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
+import { setSearch } from "./../actions/index";
+import { connect } from "react-redux";
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setSearch: searchString => {
+      dispatch(setSearch({ searchString }));
+    }
+  };
+}
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,7 +35,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Searchbar() {
+function SearchBar(props) {
   const classes = useStyles();
   const [searchValue, setSearchValue] = useState("");
 
@@ -34,7 +44,7 @@ export default function Searchbar() {
   }
 
   function search() {
-    console.log(searchValue);
+    props.setSearch(searchValue);
   }
 
   return (
@@ -56,3 +66,8 @@ export default function Searchbar() {
     </Paper>
   );
 }
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SearchBar);
