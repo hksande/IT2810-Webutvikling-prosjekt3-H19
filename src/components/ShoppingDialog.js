@@ -7,6 +7,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Button from "@material-ui/core/Button";
 import React from "react";
+import "./../index.css";
 
 export default function ShoppingDialog(props) {
   return (
@@ -14,18 +15,29 @@ export default function ShoppingDialog(props) {
       <DialogTitle>Handlekurv</DialogTitle>
       <DialogContent dividers>
         <List>
-          {props.shoppingCart.map(el => {
-            return (
-              <ListItem>
-                <ListItemText primary={el.header} secondary={el.count} />
+          {Object.keys(props.shoppingCart).map((key, index) => {
+            return props.shoppingCart[key] === 0 ? (
+              <div key={key} />
+            ) : (
+              <ListItem key={key}>
+                <ListItemText
+                  primary={key}
+                  secondary={props.shoppingCart[key]}
+                />
               </ListItem>
             );
           })}
         </List>
       </DialogContent>
       <DialogActions>
-        <Button color="primary" onClick={props.closeDialog}>Fortsett å handle</Button>
-        <Button color="primary" onClick={props.confirm}>Bekreft kjøp</Button>
+        <div className="flex-container-space-between">
+          <Button color="primary" onClick={props.closeDialog}>
+            Fortsett å handle
+          </Button>
+          <Button color="primary" variant="contained" onClick={props.confirm}>
+            Bekreft kjøp
+          </Button>
+        </div>
       </DialogActions>
     </Dialog>
   );

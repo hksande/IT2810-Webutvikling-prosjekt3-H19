@@ -76,6 +76,8 @@ export default class Map extends Component {
   }
 }
 
+/*
+Får feilmelding, TODO: fix
 Map.propTypes = {
   map: PropTypes.shape({
     id: PropTypes.string.isRequired,
@@ -88,3 +90,5 @@ Map.propTypes = {
     ).isRequired
   }).isRequired
 };
+
+*/

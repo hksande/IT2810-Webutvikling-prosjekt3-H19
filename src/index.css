@@ -39,7 +39,7 @@ code {
   background-color: white;
 }
 
-.flex-container{
+.flex-container-center {
   display: flex;
   justify-content: center;
   
@@ -50,7 +50,7 @@ code {
   justify-content: center;
 }
 
-.flex-container-checkboxes{
+.flex-container-checkboxes {
   display: flex;
   align-items: stretch;
 }
@@ -117,6 +117,12 @@ code {
 .image{
   width: 55px;
   height: 150px;
+  
+.flex-container-space-between {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
+
 
 /*farge vinmonopolet: #F0F0DC*/
