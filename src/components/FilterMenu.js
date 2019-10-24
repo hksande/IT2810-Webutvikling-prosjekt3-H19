@@ -23,8 +23,8 @@ function mapStateToProps(state) {
   };
 }
 
-const filterList = [
-  ["------------", null],
+const FILTER_LIST = [
+  ["Siste nytt", null],
   ["Pris stigende", "price_ASC"],
   ["Pris synkende", "price_DESC"],
   ["Navn stigende", "name_ASC"],
@@ -64,7 +64,7 @@ const StyledMenuItem = withStyles(theme => ({
 
 function FilterMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [activeFilter, setActiveFilter] = React.useState("------------");
+  const [activeFilter, setActiveFilter] = React.useState("Siste nytt");
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -75,8 +75,8 @@ function FilterMenu(props) {
   };
 
   const handleMenuClick = e => {
-    setActiveFilter(filterList[e.currentTarget.dataset.div_index][0]);
-    props.setOrderBy(filterList[e.currentTarget.dataset.div_index][1]);
+    setActiveFilter(FILTER_LIST[e.currentTarget.dataset.div_index][0]);
+    props.setOrderBy(FILTER_LIST[e.currentTarget.dataset.div_index][1]);
   };
 
   return (
@@ -101,7 +101,7 @@ function FilterMenu(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {filterList.map((el, index) => {
+        {FILTER_LIST.map((el, index) => {
           return (
             <StyledMenuItem
               key={index}

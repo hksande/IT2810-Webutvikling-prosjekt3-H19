@@ -19,7 +19,7 @@ code {
   font-family: "Jomolhari", serif;
 }
 
-.flex-container-center {
+.flex-container-search {
   display: flex;
   justify-content: center;
   margin: 5vh 0;
@@ -30,13 +30,8 @@ code {
   justify-content: center;
 }
 
-.flex-container-checkboxes {
-  display: flex;
-  align-items: stretch;
-}
-
 .paper {
-  margin: 0 15vw;
+  margin: 0 13vw;
 }
 
 .list {
@@ -98,10 +93,6 @@ ol li:hover {
   align-items: flex-start;
 }
 
-.category {
-  width: 20%;
-}
-
 .main {
   width: 75%;
   border-left: 1px solid gray;
@@ -109,8 +100,14 @@ ol li:hover {
 
 /* Styling for categorylist: */
 
+.category {
+  width: 20%;
+}
+
 .categoryList {
   list-style-type: none;
+  width: 100%;
+  padding-left: 20px;
 }
 
 .top-list-item,
@@ -178,6 +175,63 @@ ol li:hover {
   height: 50vh;
 }
 
-/* Styling for product list item: */
+/* Styling for shopping cart: */
 
-/*farge vinmonopolet: #F0F0DC*/
+.shopping-cart-list {
+  padding: 0;
+  list-style-type: none;
+}
+
+/* Responsivitet: */
+@media only screen and (max-width: 1200px) {
+  .paper {
+    margin: 0 5vw;
+  }
+  .flex-container-search {
+    flex-direction: column;
+    align-items: center;
+  }
+  .searchBar {
+    margin-bottom: 20px;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .flex-container-products {
+    flex-direction: column;
+    align-items: center;
+  }
+  .paper {
+    margin: 0;
+  }
+  .main {
+    border: none;
+    width: 90%;
+  }
+  .categoryList {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0;
+    flex-wrap: wrap;
+  }
+  .category {
+    width: 100%;
+    border-bottom: 1px solid gray;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .product-image {
+    display: none;
+  }
+  .grid-container-product-summary {
+    grid-template-columns: auto;
+  }
+  .product-name {
+    grid-column: 1;
+  }
+  .grid-container-product-details {
+    margin-left: 0;
+  }
+}

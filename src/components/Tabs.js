@@ -1,19 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import SearchBar from "./Searchbar";
-import ProductsContainer from "./ProductsContainer";
-import TopProductsContainer from "./TopProductsContainer";
-import FilterMenu from "./FilterMenu";
-import Category from "./Category";
 import IconButton from "@material-ui/core/IconButton";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Tooltip from "@material-ui/core/Tooltip";
 import Badge from "@material-ui/core/Badge";
+
+import SearchBar from "./Searchbar";
+import AllProductsContainer from "./AllProductsContainer";
+import TopProductsContainer from "./TopProductsContainer";
+import FilterMenu from "./FilterMenu";
+import Category from "./Category";
+
 import "./../index.css";
 import { connect } from "react-redux";
 
@@ -106,7 +109,7 @@ function SimpleTabs(props) {
                 </Badge>
               </Tooltip>
             </div>
-            <div className="flex-container-center">
+            <div className="flex-container-search">
               <div className="searchBar">
                 <SearchBar />
               </div>
@@ -114,7 +117,7 @@ function SimpleTabs(props) {
                 <FilterMenu />
               </div>
             </div>
-            <ProductsContainer changeCount={props.changeCount} />
+            <AllProductsContainer changeCount={props.changeCount} />
           </div>
         </div>
       </TabPanel>
