@@ -24,7 +24,7 @@ function mapStateToProps(state) {
 }
 
 const filterList = [
-  ["------------", null],
+  ["Siste nytt", null],
   ["Pris stigende", "price_ASC"],
   ["Pris synkende", "price_DESC"],
   ["Navn stigende", "name_ASC"],
@@ -64,7 +64,7 @@ const StyledMenuItem = withStyles(theme => ({
 
 function FilterMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [activeFilter, setActiveFilter] = React.useState("------------");
+  const [activeFilter, setActiveFilter] = React.useState("Siste nytt");
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
