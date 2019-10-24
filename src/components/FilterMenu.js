@@ -5,6 +5,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Filter_List from "@material-ui/icons/FilterList";
+import Tooltip from "@material-ui/core/Tooltip";
 import { setOrderBy } from "./../actions/index";
 import { connect } from "react-redux";
 
@@ -80,17 +81,19 @@ function FilterMenu(props) {
 
   return (
     <div>
-      <Button
-        aria-controls="customized-menu"
-        aria-haspopup="true"
-        variant="contained"
-        color="default"
-        onClick={handleClick}
-        endIcon={<Filter_List />}
-        size="large"
-      >
-        {activeFilter}
-      </Button>
+      <Tooltip title="Filtrer på">
+        <Button
+          aria-controls="customized-menu"
+          aria-haspopup="true"
+          variant="contained"
+          color="default"
+          onClick={handleClick}
+          endIcon={<Filter_List />}
+          size="large"
+        >
+          {activeFilter}
+        </Button>
+      </Tooltip>
       <StyledMenu
         id="customized-menu"
         anchorEl={anchorEl}

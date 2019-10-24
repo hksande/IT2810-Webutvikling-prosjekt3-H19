@@ -3,6 +3,7 @@ import "./../index.css";
 import { connect } from "react-redux";
 import { setTypeFilter } from "./../actions/index";
 
+
 function mapDispatchToProps(dispatch) {
   return {
     setTypeFilter: typeFilter => {
