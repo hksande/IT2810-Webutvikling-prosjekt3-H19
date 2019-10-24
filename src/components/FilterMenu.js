@@ -23,7 +23,7 @@ function mapStateToProps(state) {
   };
 }
 
-const filterList = [
+const FILTER_LIST = [
   ["Siste nytt", null],
   ["Pris stigende", "price_ASC"],
   ["Pris synkende", "price_DESC"],
@@ -75,8 +75,8 @@ function FilterMenu(props) {
   };
 
   const handleMenuClick = e => {
-    setActiveFilter(filterList[e.currentTarget.dataset.div_index][0]);
-    props.setOrderBy(filterList[e.currentTarget.dataset.div_index][1]);
+    setActiveFilter(FILTER_LIST[e.currentTarget.dataset.div_index][0]);
+    props.setOrderBy(FILTER_LIST[e.currentTarget.dataset.div_index][1]);
   };
 
   return (
@@ -101,7 +101,7 @@ function FilterMenu(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {filterList.map((el, index) => {
+        {FILTER_LIST.map((el, index) => {
           return (
             <StyledMenuItem
               key={index}

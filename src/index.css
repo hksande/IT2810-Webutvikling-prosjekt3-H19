@@ -107,6 +107,7 @@ ol li:hover {
 .categoryList {
   list-style-type: none;
   width: 100%;
+  padding-left: 20px;
 }
 
 .top-list-item,
@@ -174,6 +175,13 @@ ol li:hover {
   height: 50vh;
 }
 
+/* Styling for shopping cart: */
+
+.shopping-cart-list {
+  padding: 0;
+  list-style-type: none;
+}
+
 /* Responsivitet: */
 @media only screen and (max-width: 1200px) {
   .paper {
@@ -203,7 +211,13 @@ ol li:hover {
   .categoryList {
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
+    align-items: flex-start;
+    padding: 0;
+    flex-wrap: wrap;
+  }
+  .category {
+    width: 100%;
+    border-bottom: 1px solid gray;
   }
 }
 
