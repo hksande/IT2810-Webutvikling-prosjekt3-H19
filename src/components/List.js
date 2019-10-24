@@ -7,6 +7,7 @@ import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import Divider from "@material-ui/core/Divider";
+import Tooltip from "@material-ui/core/Tooltip";
 import "./../index.css";
 
 export default function ControlledExpansionPanels(props) {
@@ -53,26 +54,31 @@ export default function ControlledExpansionPanels(props) {
                   <b>Land: </b> {el.origin}
                 </p>
                 <div className="product-add">
-                  <IconButton
-                    variant="contained"
-                    color="primary"
-                    data-div_name={el.name}
-                    onClick={handleIncrement}
-                  >
-                    <AddIcon />
-                  </IconButton>
+                  <Tooltip title="Legg til i handlekurv">
+                    <IconButton
+                      variant="contained"
+                      color="primary"
+                      data-div_name={el.name}
+                      onClick={handleIncrement}
+                    >
+                      <AddIcon />
+                    </IconButton>
+                  </Tooltip>
                   <h2>{el.name in props.drinks ? props.drinks[el.name] : 0}</h2>
-                  <IconButton
-                    variant="contained"
-                    color="primary"
-                    data-div_name={el.name}
-                    onClick={handleDecrement}
-                    disabled={
-                      !(el.name in props.drinks) || props.drinks[el.name] === 0
-                    }
-                  >
-                    <RemoveIcon />
-                  </IconButton>
+                  <Tooltip title="Fjern fra handlekurv">
+                    <IconButton
+                      variant="contained"
+                      color="primary"
+                      data-div_name={el.name}
+                      onClick={handleDecrement}
+                      disabled={
+                        !(el.name in props.drinks) ||
+                        props.drinks[el.name] === 0
+                      }
+                    >
+                      <RemoveIcon />
+                    </IconButton>
+                  </Tooltip>
                 </div>
 
                 <p className="product-description">
