@@ -149,4 +149,19 @@ ol li:hover {
   border-left: 1px solid black;
 }
 
+/* Styling for categorylist: */
+
+.categoryList {
+  list-style-type: none;
+}
+
+.list-item {
+  cursor: pointer;
+  margin: 10px;
+}
+
+.active {
+  font-weight: 700;
+}
+
 /*farge vinmonopolet: #F0F0DC*/

@@ -46,7 +46,13 @@ const productsReducer = (
     case SET_SEARCH:
       return { ...state, searchString: action.payload.searchString };
     case SET_TYPE_FILTER:
-      return { ...state, typeFilter: action.payload.typeFilter };
+      return {
+        ...state,
+        typeFilter:
+          action.payload.typeFilter === undefined
+            ? null
+            : action.payload.typeFilter
+      };
     default:
       return state;
   }
