@@ -107,6 +107,7 @@ code {
 .add-to-cart {
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 40px;
 }
 
@@ -147,6 +148,21 @@ ol li:hover {
 .main {
   width: 75%;
   border-left: 1px solid black;
+}
+
+/* Styling for categorylist: */
+
+.categoryList {
+  list-style-type: none;
+}
+
+.list-item {
+  cursor: pointer;
+  margin: 10px;
+}
+
+.active {
+  font-weight: 700;
 }
 
 /*farge vinmonopolet: #F0F0DC*/
