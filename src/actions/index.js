@@ -2,7 +2,8 @@ import {
   CHANGE_COUNT,
   RESET_COUNT,
   SET_ORDER_BY,
-  SET_SEARCH
+  SET_SEARCH,
+  SET_TYPE_FILTER
 } from "../constants/actionTypes";
 
 export function changeCount(payload) {
@@ -19,4 +20,8 @@ export function setOrderBy(payload) {
 
 export function setSearch(payload) {
   return { type: SET_SEARCH, payload };
+}
+
+export function setTypeFilter(payload) {
+  return { type: SET_TYPE_FILTER, payload };
 }

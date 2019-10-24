@@ -46,12 +46,13 @@ function mapStateToProps(state) {
   return {
     drinks: state.products.drinks,
     orderBy: state.products.orderBy,
-    searchString: state.products.searchString
+    searchString: state.products.searchString,
+    typeFilter: state.products.typeFilter
   };
 }
 
 function ProductsContainer(props) {
-  const filter = "Rødvin";
+  const filter = props.typeFilter;
   const query = filter === null ? ALL_PRODUCTS : GET_PRODUCTS_BY_TYPE;
   const dataName = filter === null ? "allProducts" : "getProductsByType";
   let variables = {

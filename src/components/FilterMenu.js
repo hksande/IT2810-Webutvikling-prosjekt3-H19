@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import Filter_List from "@material-ui/icons/FilterList";
 import { setOrderBy } from "./../actions/index";
 import { connect } from "react-redux";
 
@@ -15,9 +16,18 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+function mapStateToProps(state) {
+  return {
+    orderBy: state.products.orderBy
+  };
+}
+
 const filterList = [
-  ["Pris høy-lav", "price_DESC"],
-  ["Pris lav-høy", "price_ASC"]
+  ["------------", null],
+  ["Pris stigende", "price_ASC"],
+  ["Pris synkende", "price_DESC"],
+  ["Navn stigende", "name_ASC"],
+  ["Navn synkende", "name_DESC"]
 ];
 
 const StyledMenu = withStyles({
@@ -53,6 +63,7 @@ const StyledMenuItem = withStyles(theme => ({
 
 function FilterMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [activeFilter, setActiveFilter] = React.useState("------------");
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -63,7 +74,8 @@ function FilterMenu(props) {
   };
 
   const handleMenuClick = e => {
-    props.setOrderBy(e.currentTarget.dataset.div_name);
+    setActiveFilter(filterList[e.currentTarget.dataset.div_index][0]);
+    props.setOrderBy(filterList[e.currentTarget.dataset.div_index][1]);
   };
 
   return (
@@ -72,10 +84,12 @@ function FilterMenu(props) {
         aria-controls="customized-menu"
         aria-haspopup="true"
         variant="contained"
-        color="primary"
+        color="default"
         onClick={handleClick}
+        endIcon={<Filter_List />}
+        size="large"
       >
-        Filter
+        {activeFilter}
       </Button>
       <StyledMenu
         id="customized-menu"
@@ -88,7 +102,7 @@ function FilterMenu(props) {
           return (
             <StyledMenuItem
               key={index}
-              data-div_name={el[1]}
+              data-div_index={index}
               onClick={handleMenuClick}
             >
               <ListItemText primary={el[0]} />
@@ -101,6 +115,6 @@ function FilterMenu(props) {
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(FilterMenu);

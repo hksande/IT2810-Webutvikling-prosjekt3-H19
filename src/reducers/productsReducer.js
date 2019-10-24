@@ -2,7 +2,8 @@ import {
   CHANGE_COUNT,
   RESET_COUNT,
   SET_ORDER_BY,
-  SET_SEARCH
+  SET_SEARCH,
+  SET_TYPE_FILTER
 } from "../constants/actionTypes";
 
 const productsReducer = (
@@ -10,7 +11,8 @@ const productsReducer = (
     count: 0,
     drinks: {},
     orderBy: null,
-    searchString: null
+    searchString: null,
+    typeFilter: null
   },
   action
 ) => {
@@ -43,6 +45,8 @@ const productsReducer = (
       return { ...state, orderBy: action.payload.orderBy };
     case SET_SEARCH:
       return { ...state, searchString: action.payload.searchString };
+    case SET_TYPE_FILTER:
+      return { ...state, typeFilter: action.payload.typeFilter };
     default:
       return state;
   }
