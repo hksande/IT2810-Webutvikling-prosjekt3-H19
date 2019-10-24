@@ -19,7 +19,7 @@ code {
   font-family: "Jomolhari", serif;
 }
 
-.flex-container-center {
+.flex-container-search {
   display: flex;
   justify-content: center;
   margin: 5vh 0;
@@ -28,11 +28,6 @@ code {
 .flex-header {
   display: flex;
   justify-content: center;
-}
-
-.flex-container-checkboxes {
-  display: flex;
-  align-items: stretch;
 }
 
 .paper {
@@ -178,6 +173,28 @@ ol li:hover {
   height: 50vh;
 }
 
-/* Styling for product list item: */
+/* Responsivitet: */
 
-/*farge vinmonopolet: #F0F0DC*/
+@media only screen and (max-width: 992px) {
+  .flex-container-products {
+    flex-direction: column;
+  }
+  .flex-container-search {
+    flex-direction: column;
+    align-items: center;
+  }
+  .searchBar {
+    margin-bottom: 20px;
+  }
+  .paper {
+    margin: 0;
+  }
+  .main {
+    border: none;
+  }
+  .categoryList {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}

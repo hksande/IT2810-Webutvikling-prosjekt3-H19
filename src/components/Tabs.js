@@ -106,7 +106,7 @@ function SimpleTabs(props) {
                 </Badge>
               </Tooltip>
             </div>
-            <div className="flex-container-center">
+            <div className="flex-container-search">
               <div className="searchBar">
                 <SearchBar />
               </div>
