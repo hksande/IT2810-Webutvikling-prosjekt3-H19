@@ -6,6 +6,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
+import Divider from "@material-ui/core/Divider";
 import "./../index.css";
 
 export default function ControlledExpansionPanels(props) {
@@ -46,9 +47,21 @@ export default function ControlledExpansionPanels(props) {
               </div>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-              <div className="grid-container-expansion-panel">
-                <p className="yellow-border">{el.description}</p>
-                <div className="yellow-border add-to-cart">
+              <Divider />
+              <div className="grid-container-product-details ">
+                <p className="product-origin">
+                  <b>Land: </b> {el.origin}
+                </p>
+                <div className="product-add">
+                  <IconButton
+                    variant="contained"
+                    color="primary"
+                    data-div_name={el.name}
+                    onClick={handleIncrement}
+                  >
+                    <AddIcon />
+                  </IconButton>
+                  <h2>{el.name in props.drinks ? props.drinks[el.name] : 0}</h2>
                   <IconButton
                     variant="contained"
                     color="primary"
@@ -60,16 +73,12 @@ export default function ControlledExpansionPanels(props) {
                   >
                     <RemoveIcon />
                   </IconButton>
-                  <h2>{el.name in props.drinks ? props.drinks[el.name] : 0}</h2>
-                  <IconButton
-                    variant="contained"
-                    color="primary"
-                    data-div_name={el.name}
-                    onClick={handleIncrement}
-                  >
-                    <AddIcon />
-                  </IconButton>
                 </div>
+
+                <p className="product-description">
+                  <b>Smak: </b>
+                  <i>{el.description}</i>
+                </p>
               </div>
             </ExpansionPanelDetails>
           </ExpansionPanel>
