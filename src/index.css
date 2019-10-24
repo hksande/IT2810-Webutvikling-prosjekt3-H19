@@ -9,12 +9,13 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue";
 }
 
 .header,
-.product-name {
+.product-name,
+.top-products-header {
   font-family: "Jomolhari", serif;
 }
 
@@ -35,7 +36,7 @@ code {
 }
 
 .paper {
-  margin: 5vh 15vw;
+  margin: 0 15vw;
 }
 
 .list {
@@ -89,7 +90,8 @@ code {
 }
 
 ol li:hover {
-  color: #d52484;
+  color: black;
+  font-weight: 700;
 }
 
 .image {
@@ -128,6 +130,7 @@ ol li:hover {
   list-style-type: none;
 }
 
+.top-list-item,
 .list-item {
   cursor: pointer;
   margin: 10px;

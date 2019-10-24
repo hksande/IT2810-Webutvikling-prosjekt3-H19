@@ -1,7 +1,6 @@
 import world from "@south-paw/react-vector-maps/maps/json/world.json";
 import VectorMap from "@south-paw/react-vector-maps";
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 import "./../index.css";
 import { Wrapper, Output, MapWrapper } from "./styled";
@@ -38,10 +37,10 @@ const countryMap = {
 const StyledMap = styled(MapWrapper)`
   svg {
     path {
-      fill: #3d0043;
+      fill: #565656;
 
       &[aria-current="true"] {
-        fill: #d52484;
+        fill: #c09f80;
       }
     }
   }
@@ -63,23 +62,21 @@ export default class Map extends Component {
   render() {
     const { current } = this.state;
     const top = this.props.data.slice(0, 10);
-    console.log(top);
     return (
       <div>
-        <h2>Topp 10 mest kjøpte varer</h2>
+        <h1 className="top-products-header">Mest populære produkter</h1>
         <br />
         <Wrapper>
           <Output>
-            <p>
-              <strong>
-                Hold musen over navnene for å se hvilket land varene er fra:
-              </strong>
-            </p>
+            <h4>
+              Hold musen over varenavnet for å se hvilket land det er produsert
+              i:
+            </h4>
             <ol className="map-list">
               {top.map(el => {
                 return (
                   <li
-                    className="list-item"
+                    className="top-list-item"
                     onMouseEnter={() => this.setCurrent(countryMap[el.origin])}
                     onMouseLeave={() => this.clearCurrent()}
                     key={el.name}
