@@ -6,12 +6,22 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import SearchBar from "./Searchbar";
-import Checkboxes from "./Checkboxes";
 import ProductsContainer from "./ProductsContainer";
 import TopProductsContainer from "./TopProductsContainer";
 import FilterMenu from "./FilterMenu";
 import Category from "./Category";
+import IconButton from "@material-ui/core/IconButton";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import Tooltip from "@material-ui/core/Tooltip";
+import Badge from "@material-ui/core/Badge";
 import "./../index.css";
+import { connect } from "react-redux";
+
+function mapStateToProps(state) {
+  return {
+    typeFilter: state.products.typeFilter
+  };
+}
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -43,7 +53,7 @@ function a11yProps(index) {
   };
 }
 
-export default function SimpleTabs(props) {
+function SimpleTabs(props) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -59,14 +69,43 @@ export default function SimpleTabs(props) {
           aria-label="simple tabs example"
           centered
         >
-          <Tab label="Liste med alkohol" {...a11yProps(0)} />
-          <Tab label="Mest kjøpte" {...a11yProps(1)} />
+          <Tab label="Drikkevarer" {...a11yProps(0)} />
+          <Tab label="Mest populære" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
         <div className="flex-container-products">
-          <div className="category"><Category/></div>
+          <div className="category">
+            <Category />
+          </div>
           <div className="main">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+                fontFamily: "Jomolhari ,serif"
+              }}
+            >
+              <div />
+              <h1>
+                {props.typeFilter === null
+                  ? "Alle produkter"
+                  : props.typeFilter}
+              </h1>
+              <Tooltip title="Handlekurv">
+                <Badge badgeContent={props.count} color="secondary">
+                  <IconButton
+                    color="inherit"
+                    aria-label="shopping-cart"
+                    onClick={props.openDialog}
+                  >
+                    <ShoppingCartIcon />
+                  </IconButton>
+                </Badge>
+              </Tooltip>
+            </div>
             <div className="flex-container-center">
               <div className="searchBar">
                 <SearchBar />
@@ -85,3 +124,5 @@ export default function SimpleTabs(props) {
     </div>
   );
 }
+
+export default connect(mapStateToProps)(SimpleTabs);

@@ -60,7 +60,7 @@ function SearchBar(props) {
     <Paper className={classes.root}>
       <InputBase
         className={classes.input}
-        placeholder="Søk drikkevarer"
+        placeholder="Søk i drikkevarer"
         inputProps={{ "aria-label": "search google maps" }}
         value={searchValue}
         onChange={handleSearchChange}

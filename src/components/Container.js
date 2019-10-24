@@ -30,6 +30,7 @@ function mapDispatchToProps(dispatch) {
     }
   };
 }
+
 function Container(props) {
   const [activeTab, setActiveTab] = useState("0");
   const [isDialogOpen, setDialogOpen] = useState(false);
@@ -58,13 +59,15 @@ function Container(props) {
 
   return (
     <div>
-      <Header count={props.count} openDialog={openDialog} />
+      <Header />
       <Paper className="paper">
         <Tabs
           changeActiveTab={changeActiveTab}
           active={activeTab}
           changeCount={props.changeCount}
           content={props.drinks}
+          count={props.count}
+          openDialog={openDialog}
         />
       </Paper>
 
