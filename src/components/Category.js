@@ -26,7 +26,7 @@ function Category(props) {
 
   return (
     <div>
-      <h5>Velg kategori:</h5>
+      <h4 style={{ color: "#C09F80" }}>Velg kategori:</h4>
       <hr></hr>
       <ul className="categoryList">
         {CATEGORIES.map((el, index) => {

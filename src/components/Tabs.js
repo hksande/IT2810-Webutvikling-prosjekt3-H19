@@ -59,13 +59,15 @@ export default function SimpleTabs(props) {
           aria-label="simple tabs example"
           centered
         >
-          <Tab label="Liste med alkohol" {...a11yProps(0)} />
-          <Tab label="Mest kjøpte" {...a11yProps(1)} />
+          <Tab label="Drikkevarer" {...a11yProps(0)} />
+          <Tab label="Mest populære" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
         <div className="flex-container-products">
-          <div className="category"><Category/></div>
+          <div className="category">
+            <Category />
+          </div>
           <div className="main">
             <div className="flex-container-center">
               <div className="searchBar">
