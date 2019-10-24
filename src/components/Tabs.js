@@ -10,6 +10,10 @@ import ProductsContainer from "./ProductsContainer";
 import TopProductsContainer from "./TopProductsContainer";
 import FilterMenu from "./FilterMenu";
 import Category from "./Category";
+import IconButton from "@material-ui/core/IconButton";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import Tooltip from "@material-ui/core/Tooltip";
+import Badge from "@material-ui/core/Badge";
 import "./../index.css";
 import { connect } from "react-redux";
 
@@ -75,16 +79,33 @@ function SimpleTabs(props) {
             <Category />
           </div>
           <div className="main">
-            <h1
+            <div
               style={{
                 display: "flex",
-                flexDirection: "column",
+                flexDirection: "row",
                 alignItems: "center",
+                justifyContent: "space-between",
                 fontFamily: "Jomolhari ,serif"
               }}
             >
-              {props.typeFilter === null ? "Alle produkter" : props.typeFilter}
-            </h1>
+              <div />
+              <h1>
+                {props.typeFilter === null
+                  ? "Alle produkter"
+                  : props.typeFilter}
+              </h1>
+              <Tooltip title="Handlekurv">
+                <Badge badgeContent={props.count} color="secondary">
+                  <IconButton
+                    color="inherit"
+                    aria-label="shopping-cart"
+                    onClick={props.openDialog}
+                  >
+                    <ShoppingCartIcon />
+                  </IconButton>
+                </Badge>
+              </Tooltip>
+            </div>
             <div className="flex-container-center">
               <div className="searchBar">
                 <SearchBar />
