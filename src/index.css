@@ -225,4 +225,13 @@ ol li:hover {
   .product-image {
     display: none;
   }
+  .grid-container-product-summary {
+    grid-template-columns: auto;
+  }
+  .product-name {
+    grid-column: 1;
+  }
+  .grid-container-product-details {
+    margin-left: 0;
+  }
 }

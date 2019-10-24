@@ -39,7 +39,11 @@ export default function ControlledExpansionPanels(props) {
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
               <div className="grid-container-product-summary">
                 <img src={el.img} className="product-image"></img>
-                <div>
+                <div
+                  style={{
+                    overflow: "hidden"
+                  }}
+                >
                   <h3 className="product-name">{el.name}</h3>
                   <p>
                     <i>Kr. {el.price}</i>
@@ -80,7 +84,6 @@ export default function ControlledExpansionPanels(props) {
                     </IconButton>
                   </Tooltip>
                 </div>
-
                 <p className="product-description">
                   <b>Smak: </b>
                   <i>{el.description}</i>
