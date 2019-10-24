@@ -6,7 +6,7 @@ import Map from "./Map";
 
 const GET_TOP_PRODUCTS = gql`
   {
-    products(orderBy: purchased_DESC, limit: 10) {
+    allProducts(searchString: "", orderBy: purchased_DESC) {
       name
       purchased
       origin
@@ -28,7 +28,7 @@ function TopProductsContainer() {
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
 
-  return <Map data={data} />;
+  return <Map data={data.allProducts} />;
 }
 
 export default connect(mapStateToProps)(TopProductsContainer);

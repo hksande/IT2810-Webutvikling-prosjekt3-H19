@@ -62,7 +62,7 @@ export default class Map extends Component {
 
   render() {
     const { current } = this.state;
-    const top = this.props.data.products.slice(0, 10);
+    const top = this.props.data.slice(0, 10);
     console.log(top);
     return (
       <div>
