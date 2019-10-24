@@ -41,6 +41,15 @@ function SearchBar(props) {
 
   function handleSearchChange(e) {
     setSearchValue(e.target.value);
+    if (e.target.value === "") {
+      search();
+    }
+  }
+
+  function handleSearchKeyPress(e) {
+    if (e.key === "Enter") {
+      search();
+    }
   }
 
   function search() {
@@ -55,6 +64,7 @@ function SearchBar(props) {
         inputProps={{ "aria-label": "search google maps" }}
         value={searchValue}
         onChange={handleSearchChange}
+        onKeyPress={handleSearchKeyPress}
       />
       <IconButton
         className={classes.iconButton}

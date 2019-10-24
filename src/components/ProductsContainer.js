@@ -4,9 +4,32 @@ import React from "react";
 import List from "./List";
 import { connect } from "react-redux";
 
-const query = gql`
-  query products($orderBy: ProductOrderByInput) {
-    products(orderBy: $orderBy) {
+const ALL_PRODUCTS = gql`
+  query allProducts($searchString: String, $orderBy: ProductOrderByInput) {
+    allProducts(searchString: $searchString, orderBy: $orderBy) {
+      name
+      id
+      type
+      price
+      purchased
+      origin
+      img
+      description
+    }
+  }
+`;
+
+const GET_PRODUCTS_BY_TYPE = gql`
+  query getProductsByType(
+    $searchString: String
+    $orderBy: ProductOrderByInput
+    $type: String
+  ) {
+    getProductsByType(
+      searchString: $searchString
+      orderBy: $orderBy
+      type: $type
+    ) {
       name
       id
       type
@@ -23,12 +46,21 @@ function mapStateToProps(state) {
   return {
     drinks: state.products.drinks,
     orderBy: state.products.orderBy,
-    searchString: state.products.searchString
+    searchString: state.products.searchString,
+    typeFilter: state.products.typeFilter
   };
 }
 
 function ProductsContainer(props) {
-  const variables = props.orderBy === null ? {} : { orderBy: props.orderBy };
+  const filter = props.typeFilter;
+  const query = filter === null ? ALL_PRODUCTS : GET_PRODUCTS_BY_TYPE;
+  const dataName = filter === null ? "allProducts" : "getProductsByType";
+  let variables = {
+    searchString: props.searchString,
+    orderBy: props.orderBy
+  };
+  variables =
+    filter === null ? { ...variables } : { ...variables, type: filter };
 
   const { data, loading, error } = useQuery(query, {
     variables: variables
@@ -37,9 +69,10 @@ function ProductsContainer(props) {
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
 
+  console.log(data);
   return (
     <List
-      content={data.products}
+      content={data[dataName]}
       changeCount={props.changeCount}
       drinks={props.drinks}
     />

@@ -10,6 +10,7 @@ import Checkboxes from "./Checkboxes";
 import ProductsContainer from "./ProductsContainer";
 import TopProductsContainer from "./TopProductsContainer";
 import FilterMenu from "./FilterMenu";
+import "./../index.css";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -62,13 +63,20 @@ export default function SimpleTabs(props) {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <div className="flex-container-center">
-          <SearchBar />
+        <div className="flex-container-products">
+          <div className="category">Kategori</div>
+          <div className="main">
+            <div className="flex-container-center">
+              <div className="searchBar">
+                <SearchBar />
+              </div>
+              <div className="filterMenu">
+                <FilterMenu />
+              </div>
+            </div>
+            <ProductsContainer changeCount={props.changeCount} />
+          </div>
         </div>
-        <Checkboxes />
-        <FilterMenu />
-        <br></br>
-        <ProductsContainer changeCount={props.changeCount} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <TopProductsContainer />
