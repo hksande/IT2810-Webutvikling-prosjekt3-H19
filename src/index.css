@@ -13,8 +13,8 @@ code {
     monospace;
 }
 
-.list-header,
-.header {
+.header,
+.product-name {
   font-family: "Jomolhari", serif;
 }
 
@@ -61,14 +61,6 @@ code {
   display: grid;
   width: 100%;
   grid-template-columns: 20% 45% 30%;
-}
-
-.purchase-info {
-  grid-column: 1;
-  grid-row: 1 / span 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .yellow-border {
@@ -143,6 +135,25 @@ ol li:hover {
 
 .active {
   font-weight: 700;
+}
+
+/* Styling for list items: */
+
+.grid-container-product-summary {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 20% 70%;
+}
+
+.product-image {
+  margin: 0 auto;
+  grid-column: 1;
+  height: 200px;
+  margin-left: 8px;
+}
+
+.product-name {
+  grid-row: 1;
 }
 
 /*farge vinmonopolet: #F0F0DC*/
