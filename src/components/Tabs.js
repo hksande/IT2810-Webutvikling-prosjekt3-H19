@@ -6,12 +6,18 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import SearchBar from "./Searchbar";
-import Checkboxes from "./Checkboxes";
 import ProductsContainer from "./ProductsContainer";
 import TopProductsContainer from "./TopProductsContainer";
 import FilterMenu from "./FilterMenu";
 import Category from "./Category";
 import "./../index.css";
+import { connect } from "react-redux";
+
+function mapStateToProps(state) {
+  return {
+    typeFilter: state.products.typeFilter
+  };
+}
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -43,7 +49,7 @@ function a11yProps(index) {
   };
 }
 
-export default function SimpleTabs(props) {
+function SimpleTabs(props) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -69,6 +75,16 @@ export default function SimpleTabs(props) {
             <Category />
           </div>
           <div className="main">
+            <h1
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                fontFamily: "Jomolhari ,serif"
+              }}
+            >
+              {props.typeFilter === null ? "Alle produkter" : props.typeFilter}
+            </h1>
             <div className="flex-container-center">
               <div className="searchBar">
                 <SearchBar />
@@ -87,3 +103,5 @@ export default function SimpleTabs(props) {
     </div>
   );
 }
+
+export default connect(mapStateToProps)(SimpleTabs);

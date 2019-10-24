@@ -10,16 +10,24 @@ import Badge from "@material-ui/core/Badge";
 export default function Header(props) {
   return (
     <AppBar position="static">
-      <Toolbar className="headerContainer">
-        <div />
-        <Typography variant="h4">Vinmonopolet</Typography>
-        <Tooltip title="Handlekurv">
-          <Badge badgeContent={props.count} color="secondary">
-            <IconButton color="inherit" aria-label="shopping-cart" onClick={props.openDialog}>
-              <ShoppingCartIcon />
-            </IconButton>
-          </Badge>
-        </Tooltip>
+      <Toolbar>
+        <div className="headerContainer">
+          <div />
+          <Typography variant="h4">
+            <div className="header">Vinmonopolet</div>
+          </Typography>
+          <Tooltip title="Handlekurv">
+            <Badge badgeContent={props.count} color="secondary">
+              <IconButton
+                color="inherit"
+                aria-label="shopping-cart"
+                onClick={props.openDialog}
+              >
+                <ShoppingCartIcon />
+              </IconButton>
+            </Badge>
+          </Tooltip>
+        </div>
       </Toolbar>
     </AppBar>
   );

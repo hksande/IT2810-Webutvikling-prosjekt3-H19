@@ -13,30 +13,9 @@ code {
     monospace;
 }
 
-.tab {
-  overflow: hidden;
-  border-top: 2px solid darkseagreen;
-  background-color: darkseagreen;
-  color: darkgreen;
-}
-
-.tab button {
-  background-color: inherit;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
-  font-size: 17px;
-}
-
-.tab button:hover {
-  background-color: rgb(154, 206, 154);
-}
-
-.tab button.active {
-  background-color: white;
+.list-header,
+.header {
+  font-family: "Jomolhari", serif;
 }
 
 .flex-container-center {
@@ -100,8 +79,9 @@ code {
 
 .headerContainer {
   display: flex;
-  justify-content: space-around;
-  padding: 2vh 0;
+  justify-content: space-between;
+  padding: 3vh 3vw;
+  width: 100%;
 }
 
 .add-to-cart {
@@ -147,7 +127,7 @@ ol li:hover {
 
 .main {
   width: 75%;
-  border-left: 1px solid black;
+  border-left: 1px solid gray;
 }
 
 /* Styling for categorylist: */
