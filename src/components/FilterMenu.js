@@ -102,7 +102,7 @@ function FilterMenu(props) {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
-        data-cy= 'shopping'
+        
       >
         {filterList.map((el, index) => {
           return (

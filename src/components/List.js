@@ -13,20 +13,18 @@ import "./../index.css";
 
 export default function ControlledExpansionPanels(props) {
   const [expanded, setExpanded] = useState(false);
-  const [counter, setCounter] = useState(0);
+  
 
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
   function handleIncrement(e) {
-    setCounter(counter++);
     props.changeCount(e.currentTarget.dataset.div_name, 1);
     e.preventDefault();
   }
 
   function handleDecrement(e) {
-    setCounter(counter--);
     props.changeCount(e.currentTarget.dataset.div_name, -1);
     e.preventDefault();
   }
@@ -41,7 +39,7 @@ export default function ControlledExpansionPanels(props) {
             expanded={expanded === index}
             onChange={handleChange(index)}
             key={el.name}
-            data-cy="expansion"
+            data-cy= {index + "expansion"}
           >
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
               <div className="grid-container-product-summary">
@@ -53,7 +51,7 @@ export default function ControlledExpansionPanels(props) {
                 >
                   <h3 data-cy = 'tekst' className="product-name">{el.name}</h3>
                   <p>
-                    <i>Kr. {el.price}</i>
+                    <i data-cy = {index + "price"}>Kr. {el.price}</i>
                   </p>
                 </div>
               </div>
@@ -72,6 +70,7 @@ export default function ControlledExpansionPanels(props) {
                       color="primary"
                       data-div_name={el.name}
                       onClick={handleIncrement}
+                      data-cy = {index + "pluss"}
                     >
                       <AddIcon />
                     </IconButton>
