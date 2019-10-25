@@ -54,6 +54,7 @@ export default function ShoppingDialog(props) {
             variant="contained"
             onClick={props.confirm}
             disabled={checkEmpty()}
+            data-cy="bekreft"
           >
             Bekreft kjøp
           </Button>

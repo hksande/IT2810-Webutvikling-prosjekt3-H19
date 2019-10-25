@@ -43,7 +43,7 @@ function SearchBar(props) {
   function handleSearchChange(e) {
     setSearchValue(e.target.value);
     if (e.target.value === "") {
-      search();
+      props.setSearch("");
     }
   }
 
