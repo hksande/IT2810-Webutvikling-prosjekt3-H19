@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import Filter_List from "@material-ui/icons/FilterList";
+import FilterList from "@material-ui/icons/FilterList";
 import Tooltip from "@material-ui/core/Tooltip";
 import { setOrderBy } from "./../actions/index";
 import { connect } from "react-redux";
@@ -23,7 +23,7 @@ function mapStateToProps(state) {
   };
 }
 
-const FILTER_LIST = [
+const filterList = [
   ["Siste nytt", null],
   ["Pris stigende", "price_ASC"],
   ["Pris synkende", "price_DESC"],
@@ -75,8 +75,8 @@ function FilterMenu(props) {
   };
 
   const handleMenuClick = e => {
-    setActiveFilter(FILTER_LIST[e.currentTarget.dataset.div_index][0]);
-    props.setOrderBy(FILTER_LIST[e.currentTarget.dataset.div_index][1]);
+    setActiveFilter(filterList[e.currentTarget.dataset.div_index][0]);
+    props.setOrderBy(filterList[e.currentTarget.dataset.div_index][1]);
   };
 
   return (
@@ -88,7 +88,7 @@ function FilterMenu(props) {
           variant="contained"
           color="default"
           onClick={handleClick}
-          endIcon={<Filter_List />}
+          endIcon={<FilterList />}
           size="large"
         >
           {activeFilter}
@@ -101,7 +101,7 @@ function FilterMenu(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {FILTER_LIST.map((el, index) => {
+        {filterList.map((el, index) => {
           return (
             <StyledMenuItem
               key={index}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
@@ -8,13 +8,39 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import Divider from "@material-ui/core/Divider";
 import Tooltip from "@material-ui/core/Tooltip";
+import Button from "@material-ui/core/Button";
 import "./../index.css";
 
 export default function ControlledExpansionPanels(props) {
   const [expanded, setExpanded] = useState(false);
 
+  // Scroll to the top when paginating
+  useEffect(() => {
+    window.scrollTo(500, 500);
+  }, []);
+
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
+  };
+
+  const handleLoadMore = () => {
+    console.log(props.currentPage);
+    props
+      .fetchMore({
+        query: props.query,
+        variables: {
+          first: props.productsPerPage,
+          skip: props.currentPage * props.productsPerPage
+        },
+        updateQuery: (prev, { fetchMoreResult }) => {
+          if (!fetchMoreResult) return prev;
+          return fetchMoreResult;
+        }
+      })
+      .then(res => {
+        const newPage = props.currentPage + 1;
+        props.setCurrentPage(newPage);
+      });
   };
 
   function handleIncrement(e) {
@@ -35,11 +61,11 @@ export default function ControlledExpansionPanels(props) {
             expanded={expanded === index}
             onChange={handleChange(index)}
             key={el.name}
-            data-cy = "expansion"
+            data-cy="expansion"
           >
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
               <div className="grid-container-product-summary">
-                <img src={el.img} className="product-image"></img>
+                <img src={el.img} alt="Produkt" className="product-image"></img>
                 <div
                   style={{
                     overflow: "hidden"
@@ -71,18 +97,20 @@ export default function ControlledExpansionPanels(props) {
                   </Tooltip>
                   <h2>{el.name in props.drinks ? props.drinks[el.name] : 0}</h2>
                   <Tooltip title="Fjern fra handlekurv">
-                    <IconButton
-                      variant="contained"
-                      color="primary"
-                      data-div_name={el.name}
-                      onClick={handleDecrement}
-                      disabled={
-                        !(el.name in props.drinks) ||
-                        props.drinks[el.name] === 0
-                      }
-                    >
-                      <RemoveIcon />
-                    </IconButton>
+                    <span>
+                      <IconButton
+                        variant="contained"
+                        color="primary"
+                        data-div_name={el.name}
+                        onClick={handleDecrement}
+                        disabled={
+                          !(el.name in props.drinks) ||
+                          props.drinks[el.name] === 0
+                        }
+                      >
+                        <RemoveIcon />
+                      </IconButton>
+                    </span>
                   </Tooltip>
                 </div>
                 <p className="product-description">
@@ -94,6 +122,9 @@ export default function ControlledExpansionPanels(props) {
           </ExpansionPanel>
         );
       })}
+      <Button variant="contained" onClick={handleLoadMore}>
+        Last mer
+      </Button>
     </div>
   );
 }

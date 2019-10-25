@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./../index.css";
 import { connect } from "react-redux";
 import { setTypeFilter } from "./../actions/index";
-
 
 function mapDispatchToProps(dispatch) {
   return {
