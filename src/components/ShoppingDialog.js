@@ -49,12 +49,14 @@ export default function ShoppingDialog(props) {
           <Button color="primary" onClick={props.closeDialog}>
             Fortsett å handle
           </Button>
+ 
           <Button
             color="primary"
             variant="contained"
             onClick={props.confirm}
             disabled={checkEmpty()}
-            data-cy="bekreft"
+            data-cy = "bekreft"
+          
           >
             Bekreft kjøp
           </Button>

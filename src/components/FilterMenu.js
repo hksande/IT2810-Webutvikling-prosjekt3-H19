@@ -105,7 +105,7 @@ function FilterMenu(props) {
         keepMounted
         open={openMenu}
         onClose={handleClose}
-        data-cy="shopping"
+        
       >
         {filterList.map((el, index) => {
           return (
