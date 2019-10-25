@@ -2,24 +2,6 @@ import { gql } from "apollo-server-express";
 import { async } from "q";
 
 export const typeDefs = gql`
-  directive @constraint(
-    # String constraints
-    minLength: Int
-    maxLength: Int
-    startsWith: String
-    endsWith: String
-    notContains: String
-    pattern: String
-    format: String
-
-    # Number constraints
-    min: Int
-    max: Int
-    exclusiveMin: Int
-    exclusiveMax: Int
-    multipleOf: Int
-  ) on INPUT_FIELD_DEFINITION
-
   enum ProductOrderByInput {
     id_ASC
     id_DESC
@@ -50,22 +32,14 @@ export const typeDefs = gql`
     description: String!
   }
 
-  input ProductWhereInput {
-    name_in: [String!]
-  }
-  input ProductUpdateInput {
-    name: String!
-    type: String
-    price: Int
-    purchased: Int
-    origin: String
-    img: String
-    description: String
+  input ProductWhereUniqueInput {
+    id: ID
+    name: String
   }
 
-  type ProductResult {
-    products: [Product]
-    totalCount: Int
+  input ProductUpdateInput {
+    name: String!
+    purchased: Int!
   }
 
   type Query {
@@ -95,11 +69,11 @@ export const typeDefs = gql`
       img: String!
       description: String!
     ): Product!
-    addPurchase(data: [ProductUpdateInput!], where: String): Product!
-    updateManyProducts(
-      data: ProductUpdateInput
-      where: ProductWhereInput
-    ): [Product!]
+    addPurchase(name: [String!], purchased: [Int!]): [Product!]
+    updateProduct(
+      data: ProductUpdateInput!
+      where: ProductWhereUniqueInput!
+    ): Product
   }
 `;
 
@@ -163,69 +137,24 @@ export const resolvers = {
         info
       );
     },
-    /*
     addPurchase: async (parent, args, context, info) => {
-      const data = await context.db.query.product({
-        where: { name: args.name },
-        info
-      });
-      return context.db.mutation.updateProduct(
-        {
-          data: {
-            purchased: data.purchased + args.purchased
-          },
-          where: {
-            name: args.name
-          }
-        },
-        info
-      );
-    }
-  }
-}*/
-    /*
-    addPurchase: async (parent, args, context, info) => {
-      //args.prototype.forEach.call(args, pname => {
-      const updatedPurchase = await Promise.all(
-        Object.keys(
-          args.map(async pname => {
-            return await context.db.mutation.updateProduct(
-              {
-                where: {
-                  name: pname
-                },
-                data: {
-                  connect: {
-                    purchased: data.purchased + args[pname]
-                  }
-                }
-              },
-              info
-            );
-          })
-        )
-      );
-      console.log(updatedPurchase);
-    }
-  }
-};
-*/
-    updateManyProducts: async (parent, args, context, info) => {
-      const data = await context.db.query.product({
+      const data = await context.db.query.products({
         where: { name_in: args.name },
         info
       });
-      return context.db.mutation.updateManyProducts(
-        {
-          data: {
-            purchased: data.purchased + args[name]
+      for (var i = 0; i < data.length; i++) {
+        await context.db.mutation.updateProduct(
+          {
+            data: {
+              purchased: parseInt(data[i].purchased) + args.purchased[i]
+            },
+            where: {
+              name: args.name[i]
+            }
           },
-          where: {
-            name: args.name
-          }
-        },
-        info
-      );
+          info
+        );
+      }
     }
   }
 };
