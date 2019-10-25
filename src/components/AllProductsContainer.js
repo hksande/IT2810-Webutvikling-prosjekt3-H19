@@ -68,12 +68,14 @@ function mapStateToProps(state) {
     drinks: state.products.drinks,
     orderBy: state.filter.orderBy,
     searchString: state.filter.searchString,
-    typeFilter: state.filter.typeFilter
+    typeFilter: state.filter.typeFilter,
+    page: state.pagination.page
   };
 }
 
 function AllProductsContainer(props) {
-  const [currentPage, setCurrentPage] = useState(1);
+
+  console.log(props.page);
 
   // Decide which query and variables to use:
   const filter = props.typeFilter;
@@ -110,20 +112,18 @@ function AllProductsContainer(props) {
   console.log(data[dataName].length);
   return (
     <List
-      currentPage={currentPage}
       productsPerPage={PRODUCTS_PER_PAGE}
-      setCurrentPage={setCurrentPage}
       content={data[dataName]}
       changeCount={props.changeCount}
       drinks={props.drinks}
       data-cy="list"
-      onLoadMore={newPage => {
+      onLoadMore={() => {
         return fetchMore({
           query: query,
           variables: {
             ...variables,
             first: PRODUCTS_PER_PAGE,
-            skip: (newPage - 1) * PRODUCTS_PER_PAGE
+            skip: (props.page - 1) * PRODUCTS_PER_PAGE
           },
           updateQuery: (prev, { fetchMoreResult }) => {
             if (!fetchMoreResult) return prev;

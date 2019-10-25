@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
@@ -16,18 +16,6 @@ export default function ControlledExpansionPanels(props) {
 
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
-  };
-
-  const handleLoadMore = () => {
-    const newPage = props.currentPage + 1;
-    props.setCurrentPage(newPage);
-    props.onLoadMore(newPage);
-  };
-
-  const handleLoadLess = () => {
-    const newPage = props.currentPage - 1;
-    props.setCurrentPage(newPage);
-    props.onLoadMore(newPage);
   };
 
   function handleIncrement(e) {
@@ -112,9 +100,7 @@ export default function ControlledExpansionPanels(props) {
         );
       })}
       <Pagination
-        navigateForward={handleLoadMore}
-        navigateBackward={handleLoadLess}
-        currentPage={props.currentPage}
+        navigate={props.onLoadMore}
       />
     </div>
   );
