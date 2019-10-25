@@ -2,7 +2,7 @@
 
 > Gruppe 24 | Prosjekt 3 | IT2810 Webutvikling 2019
 
-###### Introduksjon
+## Introduksjon
 
 _Av Johanne Lie, Mathilde Tillman Hegdal og Hans Kristian Sande_
 
@@ -10,7 +10,7 @@ _Chateau de Vin_ er en søkbar katalog som lar deg finne frem til ulike drikkeva
 
 Bon commerce!
 
-###### Backend
+## Backend
 
 **GraphQL**
 Vi har brukt en rekke teknologier i oppsettet for å linke backend til frontend, der GraphQL hovedsakelig er mekanismen som knytter dem sammen. Uten erfaring med verken REST API eller GraphQL konkluderte vi med å prøve ut den nyere teknologien da den er mer moderne. I utgangspunktet har nemlig GraphQL et smart endpoint som gjør at fetching av data krever færre spørringer (schema modellerer en graf), likevel utnyttet vi ikke dette til det fulle da vi kun har én tabell vi henter informasjon fra i databasen. Kombinert med andre teknologier som Apollo fikk vi likevel utrettet en høyere ytelse ved eksempelvis caching _(fetchPolicy)_.
@@ -37,7 +37,7 @@ Vi brukte et eget script for å seede databasen med all data.
 
 Kort fortalt er Prisma limet mellom databasen og server.
 
-###### Frontend
+## Frontend
 
 **React**
 Vi har valgt å ta i bruk React Hooks, det nyeste tilskuddet til React, ettersom dette skal forenkle syntaks og lover å løse mange av problemene man møter på med tradisjonell React(https://reactjs.org/docs/hooks-intro.html). Hovedkomponenten vår er App.js,og vi har 14 komponenter i tillegg. Disse ligger i mappen “/components”.
@@ -101,7 +101,7 @@ Det er tatt i bruk metoder innen responsive webdesign for å bedre brukeroppleve
 
 Dette gjøres hovedsakelig gjennom media queries for å endre layouten på siden ved ulike skjermstørrelser og orientering. Det er definert tre ulike media queries; 1200px, 992px og 768px. Disse breakpointsene tar utgangspunkt i best practice (https://www.solodev.com/blog/web-design/media-queries-and-mobile-css-best-practices.stml) og svarer henholdsvis til store PC-størrelser, små PC-størrelser og nettbrett. Komponentene vil legge seg under hverandre ved mindre skjermstørrelser og bildene i listeelementene taes bort. Noen av komponentene er ikke helt ferdigslipt, for eksempel vil teksten i listeelementene legge seg utenfor boksen sin eller oppå seg selv ved små skjermstørrelser. Dette er bugs gruppen er klar over og som ligger i backlogen. Det er og tatt i bruk CSS Grid og Flexbox for å oppnå et flytende layout.
 
-###### Testing
+## Testing
 
 Vi har valgt å bruke Cypress på begge testmetodene. Det er 2 end to end tester og 3 enhetstester. Søkefunksjonen og sortering er testet med end-to-end. I testen av søkefunksjoen blir det testet at det som blir skrevet inn i søkefeltet blir vist på siden etter søkeknappen er trykket. Det betyr at søket har blitt sendt til backend og funnet i databasen og blitt sendt tilbake og vist på siden. Når sortering blir testet så velges Pris Stigende og vi tester da om den som koster minst er øverst. Minimumen som det testes mot er noe vi har hardkodet inn siden vi vet hva som er den minste prisen. Den er ikke blitt hentet fra databasen. Tabsene, shoppingCart og filtrerings funksjonene blir testet med enhetstesting. Backend blir ikke sjekket, men det blir testet at alle komponentene funker som de skal. Vi valgte Cypress siden det er oversiktlig og veldig greit at det er visuelt så man ser alt som blir testet.
 For å kjøre testene må man skrive
@@ -110,7 +110,7 @@ i terminalen og så dukker det opp et vindu. Da må man trykke på
 `app_spec`
 så kjører testene. Testene må kjøres lokalt.
 
-###### Git og samarbeid
+## Git og samarbeid
 
 Vi har brukt Git og Gitlab til versjonshåndtering. Vi delte opp prosjektet i deloppgaver som ble lagt inn som issues på gitlab, og merket de med arbeidsstørrelse og type (feature/enhancement/bugfix). Vi har merket noen av commitsene med hvilket issue det løser, for å få bedre oversikt. Commitsene som ikke har blitt merket, har en forklarende tekst.
 Vi delte opp overordnet i en som jobbet med backend og to på frontend i starten og deretter fordelt oppgaver innad i frontend. Vi har enten sittet sammen eller hatt kommunikasjon via Slack. Kommunikasjonen har vært flytende.
