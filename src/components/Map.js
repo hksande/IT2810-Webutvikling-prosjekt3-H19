@@ -10,10 +10,10 @@ const countryMap = {
   England: "gb",
   Frankrike: "fr",
   Hellas: "gr",
-  NewZealand: "nz", //Fix
+  ["New Zealand"]: "nz",
   Australia: "au",
   Spania: "es",
-  SørAfrika: "za", //Fix
+  ["Sør-Afrika"]: "za",
   Sverige: "se",
   Portugal: "pt",
   USA: "us",
