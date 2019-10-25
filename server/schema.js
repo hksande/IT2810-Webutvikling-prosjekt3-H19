@@ -1,4 +1,5 @@
 import { gql } from "apollo-server-express";
+import { async } from "q";
 
 export const typeDefs = gql`
   directive @constraint(
@@ -49,9 +50,22 @@ export const typeDefs = gql`
     description: String!
   }
 
+  input ProductWhereInput {
+    name_in: [String!]
+  }
   input ProductUpdateInput {
     name: String!
+    type: String
+    price: Int
     purchased: Int
+    origin: String
+    img: String
+    description: String
+  }
+
+  type ProductResult {
+    products: [Product]
+    totalCount: Int
   }
 
   type Query {
@@ -60,10 +74,15 @@ export const typeDefs = gql`
       searchString: String
       type: String
       orderBy: ProductOrderByInput
-      offset: Int
-      limit: Int
+      skip: Int
+      first: Int
     ): [Product]!
-    allProducts(searchString: String, orderBy: ProductOrderByInput): [Product]!
+    allProducts(
+      searchString: String
+      orderBy: ProductOrderByInput
+      skip: Int
+      first: Int
+    ): [Product]!
   }
 
   type Mutation {
@@ -76,7 +95,11 @@ export const typeDefs = gql`
       img: String!
       description: String!
     ): Product!
-    addPurchase(name: String!, purchased: Int!): Product
+    addPurchase(data: [ProductUpdateInput!], where: String): Product!
+    updateManyProducts(
+      data: ProductUpdateInput
+      where: ProductWhereInput
+    ): [Product!]
   }
 `;
 
@@ -98,7 +121,9 @@ export const resolvers = {
       const data = await context.db.query.products(
         {
           where,
-          orderBy: args.orderBy
+          orderBy: args.orderBy,
+          skip: args.skip,
+          first: args.first
         },
         info
       );
@@ -111,7 +136,9 @@ export const resolvers = {
       const data = await context.db.query.products(
         {
           where,
-          orderBy: args.orderBy
+          orderBy: args.orderBy,
+          skip: args.skip,
+          first: args.first
         },
         info
       );
@@ -136,6 +163,7 @@ export const resolvers = {
         info
       );
     },
+    /*
     addPurchase: async (parent, args, context, info) => {
       const data = await context.db.query.product({
         where: { name: args.name },
@@ -145,6 +173,52 @@ export const resolvers = {
         {
           data: {
             purchased: data.purchased + args.purchased
+          },
+          where: {
+            name: args.name
+          }
+        },
+        info
+      );
+    }
+  }
+}*/
+    /*
+    addPurchase: async (parent, args, context, info) => {
+      //args.prototype.forEach.call(args, pname => {
+      const updatedPurchase = await Promise.all(
+        Object.keys(
+          args.map(async pname => {
+            return await context.db.mutation.updateProduct(
+              {
+                where: {
+                  name: pname
+                },
+                data: {
+                  connect: {
+                    purchased: data.purchased + args[pname]
+                  }
+                }
+              },
+              info
+            );
+          })
+        )
+      );
+      console.log(updatedPurchase);
+    }
+  }
+};
+*/
+    updateManyProducts: async (parent, args, context, info) => {
+      const data = await context.db.query.product({
+        where: { name_in: args.name },
+        info
+      });
+      return context.db.mutation.updateManyProducts(
+        {
+          data: {
+            purchased: data.purchased + args[name]
           },
           where: {
             name: args.name
