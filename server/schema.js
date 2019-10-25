@@ -2,24 +2,6 @@ import { gql } from "apollo-server-express";
 import { async } from "q";
 
 export const typeDefs = gql`
-  directive @constraint(
-    # String constraints
-    minLength: Int
-    maxLength: Int
-    startsWith: String
-    endsWith: String
-    notContains: String
-    pattern: String
-    format: String
-
-    # Number constraints
-    min: Int
-    max: Int
-    exclusiveMin: Int
-    exclusiveMax: Int
-    multipleOf: Int
-  ) on INPUT_FIELD_DEFINITION
-
   enum ProductOrderByInput {
     id_ASC
     id_DESC
@@ -53,11 +35,6 @@ export const typeDefs = gql`
   input ProductWhereUniqueInput {
     id: ID
     name: String
-  }
-
-  type Purchase {
-    name: String!
-    purchased: Int!
   }
 
   input ProductUpdateInput {
@@ -165,10 +142,7 @@ export const resolvers = {
         where: { name_in: args.name },
         info
       });
-      console.log(data);
-      console.log(data.length);
       for (var i = 0; i < data.length; i++) {
-        console.log("hei");
         await context.db.mutation.updateProduct(
           {
             data: {
@@ -184,57 +158,3 @@ export const resolvers = {
     }
   }
 };
-/*
-    addPurchase: async (parent, args, context, info) => {
-      //args.prototype.forEach.call(args, pname => {
-      const updatedPurchase = await Promise.all(
-        Object.keys(
-          args.map(async pname => {
-            return await context.db.mutation.updateProduct(
-              {
-                where: {
-                  name: pname
-                },
-                data: {
-                  connect: {
-                    purchased: data.purchased + args[pname]
-                  }
-                }
-              },
-              info
-            );
-          })
-        )
-      );
-      console.log(updatedPurchase);
-    }
-  }
-};
-    updateManyProducts: async (parent, args, context, info) => {
-      for (var key in args) {
-        //var value = args[key];
-        const data = await context.db.query.product({
-          where: { name: key },
-          info
-        });
-        return context.db.mutation.updateManyProducts(
-          {
-            data: {
-              purchased: data.purchased + args[key]
-            },
-            where: {
-              name: key
-            }
-          },
-          info
-        );
-      }
-    }
-  }
-};
-/*
-export var dict = {
-  "Agostino Barb d'Asti Superiore Moliss": 2,
-  "Alta Alella Laietà Gran Reserva Brut Nature 2013": 1
-};
-*/
