@@ -13,6 +13,7 @@ import "./../index.css";
 
 export default function ControlledExpansionPanels(props) {
   const [expanded, setExpanded] = useState(false);
+  
 
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -38,7 +39,7 @@ export default function ControlledExpansionPanels(props) {
             expanded={expanded === index}
             onChange={handleChange(index)}
             key={el.name}
-            data-cy="expansion"
+            data-cy= {index + "expansion"}
           >
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
               <div className="grid-container-product-summary">
@@ -55,7 +56,7 @@ export default function ControlledExpansionPanels(props) {
                     <p>{el.type}</p>
                   </div>
                   <p>
-                    <i>Kr. {el.price}</i>
+                    <i data-cy = {index + "price"}>Kr. {el.price}</i>
                   </p>
                 </div>
               </div>
@@ -74,6 +75,7 @@ export default function ControlledExpansionPanels(props) {
                       color="primary"
                       data-div_name={el.name}
                       onClick={handleIncrement}
+                      data-cy = {index + "pluss"}
                     >
                       <AddIcon />
                     </IconButton>

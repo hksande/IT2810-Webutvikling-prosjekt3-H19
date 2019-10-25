@@ -122,7 +122,7 @@ function AllProductsContainer(props) {
     });
   }
 
-  console.log(data[dataName].length);
+  //console.log(data[dataName].length);
   return (
     <List
       productsPerPage={PRODUCTS_PER_PAGE}
