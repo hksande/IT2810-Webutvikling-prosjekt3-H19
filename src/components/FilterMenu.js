@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
@@ -28,8 +28,8 @@ const filterList = [
   ["Siste nytt", null],
   ["Pris stigende", "price_ASC"],
   ["Pris synkende", "price_DESC"],
-  ["Navn stigende", "name_ASC"],
-  ["Navn synkende", "name_DESC"]
+  ["Alfabetisk", "name_ASC"],
+  ["Reversert alfabetisk", "name_DESC"]
 ];
 
 const StyledMenu = withStyles({
@@ -64,20 +64,23 @@ const StyledMenuItem = withStyles(theme => ({
 }))(MenuItem);
 
 function FilterMenu(props) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [activeFilter, setActiveFilter] = React.useState("Siste nytt");
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [openMenu, setOpenMenu] = useState(false);
+  const [activeFilter, setActiveFilter] = useState("Siste nytt");
 
   const handleClick = event => {
+    setOpenMenu(true);
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
-    setAnchorEl(null);
+    setOpenMenu(false);
   };
 
   const handleMenuClick = e => {
     setActiveFilter(filterList[e.currentTarget.dataset.div_index][0]);
     props.setOrderBy(filterList[e.currentTarget.dataset.div_index][1]);
+    handleClose();
   };
 
   return (
@@ -91,7 +94,7 @@ function FilterMenu(props) {
           onClick={handleClick}
           endIcon={<FilterList />}
           size="large"
-          data-cy = 'drop'
+          data-cy="drop"
         >
           {activeFilter}
         </Button>
@@ -100,9 +103,9 @@ function FilterMenu(props) {
         id="customized-menu"
         anchorEl={anchorEl}
         keepMounted
-        open={Boolean(anchorEl)}
+        open={openMenu}
         onClose={handleClose}
-        
+        data-cy="shopping"
       >
         {filterList.map((el, index) => {
           return (

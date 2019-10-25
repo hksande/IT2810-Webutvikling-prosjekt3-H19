@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+/* Styling for Map component: */
+
 const BORDER_STYLE = `0.1rem solid black`;
 const STROKE_COLOR = "#fff";
 

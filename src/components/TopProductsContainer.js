@@ -1,6 +1,7 @@
 import React from "react";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
+import { stopRefetch } from "../actions/index";
 import { connect } from "react-redux";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -19,12 +20,21 @@ const GET_TOP_PRODUCTS = gql`
 
 function mapStateToProps(state) {
   return {
-    drinks: state.products.drinks
+    drinks: state.products.drinks,
+    refetch: state.products.refetch
   };
 }
 
-function TopProductsContainer() {
-  const { loading, error, data } = useQuery(GET_TOP_PRODUCTS, {
+function mapDispatchToProps(dispatch) {
+  return {
+    stopRefetch: () => {
+      dispatch(stopRefetch());
+    }
+  };
+}
+
+function TopProductsContainer(props) {
+  const { refetch, loading, error, data } = useQuery(GET_TOP_PRODUCTS, {
     variables: {}
   });
 
@@ -43,7 +53,16 @@ function TopProductsContainer() {
     );
   if (error) return "Det har skjedd en feil :(";
 
+  if (props.refetch) {
+    refetch().then(() => {
+      props.stopRefetch();
+    });
+  }
+
   return <Map data={data.allProducts} />;
 }
 
-export default connect(mapStateToProps)(TopProductsContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TopProductsContainer);

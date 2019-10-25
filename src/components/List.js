@@ -49,7 +49,12 @@ export default function ControlledExpansionPanels(props) {
                     overflow: "hidden"
                   }}
                 >
-                  <h3 data-cy = 'tekst' className="product-name">{el.name}</h3>
+                  <div style={{ lineHeight: 0.5 }}>
+                    <h3 data-cy="tekst" className="product-name">
+                      {el.name}
+                    </h3>
+                    <p>{el.type}</p>
+                  </div>
                   <p>
                     <i data-cy = {index + "price"}>Kr. {el.price}</i>
                   </p>
@@ -65,7 +70,7 @@ export default function ControlledExpansionPanels(props) {
                 <div className="product-add">
                   <Tooltip title="Legg til i handlekurv">
                     <IconButton
-                      className = "increment"
+                      className="increment"
                       variant="contained"
                       color="primary"
                       data-div_name={el.name}
@@ -97,15 +102,16 @@ export default function ControlledExpansionPanels(props) {
                   <b>Smak: </b>
                   <i>{el.description}</i>
                 </p>
+                <p className="product-purchased">
+                  <b>Antall kjøpt: </b>
+                  {el.purchased}
+                </p>
               </div>
             </ExpansionPanelDetails>
           </ExpansionPanel>
         );
       })}
-      <Pagination
-        navigate={props.onLoadMore}
-        hasNextPage={props.hasNextPage}
-      />
+      <Pagination navigate={props.onLoadMore} hasNextPage={props.hasNextPage} />
     </div>
   );
 }

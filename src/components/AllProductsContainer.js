@@ -1,7 +1,8 @@
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
-import React, { useState } from "react";
+import React from "react";
 import List from "./List";
+import { stopRefetch } from "../actions/index";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { connect } from "react-redux";
 
@@ -69,7 +70,16 @@ function mapStateToProps(state) {
     orderBy: state.filter.orderBy,
     searchString: state.filter.searchString,
     typeFilter: state.filter.typeFilter,
-    page: state.pagination.page
+    page: state.pagination.page,
+    refetch: state.products.refetch
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    stopRefetch: () => {
+      dispatch(stopRefetch());
+    }
   };
 }
 
@@ -87,8 +97,9 @@ function AllProductsContainer(props) {
   variables =
     filter === null ? { ...variables } : { ...variables, type: filter };
 
-  const { data, fetchMore, loading, error } = useQuery(query, {
-    variables: variables
+  const { data, fetchMore, refetch, loading, error } = useQuery(query, {
+    variables: variables,
+    fetchPolicy: "cache"
   });
 
   if (loading)
@@ -105,6 +116,11 @@ function AllProductsContainer(props) {
       </div>
     );
   if (error) return `${error} Det har skjedd en feil :(`;
+  if (props.refetch) {
+    refetch().then(() => {
+      props.stopRefetch();
+    });
+  }
 
   //console.log(data[dataName].length);
   return (
@@ -133,4 +149,7 @@ function AllProductsContainer(props) {
   );
 }
 
-export default connect(mapStateToProps)(AllProductsContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AllProductsContainer);

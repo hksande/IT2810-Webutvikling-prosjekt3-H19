@@ -1,9 +1,10 @@
 import world from "@south-paw/react-vector-maps/maps/json/world.json";
 import VectorMap from "@south-paw/react-vector-maps";
-import React, { Component } from "react";
+import React, { useState } from "react";
+import { Wrapper, Output, MapWrapper } from "./styled";
+
 import styled from "styled-components";
 import "./../index.css";
-import { Wrapper, Output, MapWrapper } from "./styled";
 
 const countryMap = {
   Italy: "it",
@@ -46,69 +47,42 @@ const StyledMap = styled(MapWrapper)`
   }
 `;
 
-export default class Map extends Component {
-  constructor(props) {
-    super(props);
+export default function Map(props) {
+  const [current, setCurrent] = useState(null);
 
-    this.state = {
-      current: null
-    };
-  }
+  const clearCurrent = () => {
+    setCurrent(null);
+  };
+  const top = props.data;
 
-  setCurrent = id => this.setState({ current: [id] });
-
-  clearCurrent = () => this.setState({ current: null });
-
-  render() {
-    const { current } = this.state;
-    const top = this.props.data;
-    return (
-      <div>
-        <h1 className="top-products-header">Mest populære produkter</h1>
-        <br />
-        <Wrapper>
-          <Output>
-            <h4>
-              Hold musen over varenavnet for å se hvilket land det er produsert
-              i:
-            </h4>
-            <ol className="map-list">
-              {top.map(el => {
-                return (
-                  <li
-                    className="top-list-item"
-                    onMouseEnter={() => this.setCurrent(countryMap[el.origin])}
-                    onMouseLeave={() => this.clearCurrent()}
-                    key={el.name}
-                  >
-                    <code>{el.name}</code>
-                  </li>
-                );
-              })}
-            </ol>
-          </Output>
-          <StyledMap>
-            <VectorMap {...world} currentLayers={current} />
-          </StyledMap>
-        </Wrapper>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <h1 className="top-products-header">Mest populære produkter</h1>
+      <br />
+      <Wrapper>
+        <Output>
+          <h4>
+            Hold musen over varenavnet for å se hvilket land det er produsert i:
+          </h4>
+          <ol className="map-list">
+            {top.map(el => {
+              return (
+                <li
+                  className="top-list-item"
+                  onMouseEnter={() => setCurrent(countryMap[el.origin])}
+                  onMouseLeave={() => clearCurrent()}
+                  key={el.name}
+                >
+                  <code>{el.name}</code>
+                </li>
+              );
+            })}
+          </ol>
+        </Output>
+        <StyledMap>
+          <VectorMap {...world} currentLayers={current} />
+        </StyledMap>
+      </Wrapper>
+    </div>
+  );
 }
-
-/*
-Får feilmelding, TODO: fix
-Map.propTypes = {
-  map: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    viewBox: PropTypes.string.isRequired,
-    layers: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        d: PropTypes.string.isRequired
-      })
-    ).isRequired
-  }).isRequired
-};
-
-*/

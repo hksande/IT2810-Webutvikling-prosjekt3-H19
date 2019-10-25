@@ -158,6 +158,13 @@ ol li:hover {
   grid-column: 1 / span 2;
 }
 
+.product-purchased {
+  grid-row: 3;
+  grid-column: 1;
+  margin-top: 40px;
+  color: gray;
+}
+
 /* Styling for header: */
 
 .header-container {

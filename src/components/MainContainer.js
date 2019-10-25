@@ -46,7 +46,7 @@ function MainContainer(props) {
   const [isDialogOpen, setDialogOpen] = useState(false);
   const [isSnackBarOpen, setSnackBar] = useState(false);
 
-  const [addPurchase, { data }] = useMutation(ADD_PURCHASE);
+  const [addPurchase] = useMutation(ADD_PURCHASE);
 
   function changeActiveTab(active) {
     setActiveTab(active);
