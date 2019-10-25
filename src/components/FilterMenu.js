@@ -6,13 +6,14 @@ import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import FilterList from "@material-ui/icons/FilterList";
 import Tooltip from "@material-ui/core/Tooltip";
-import { setOrderBy } from "./../actions/index";
+import { setOrderBy, setPage } from "./../actions/index";
 import { connect } from "react-redux";
 
 function mapDispatchToProps(dispatch) {
   return {
     setOrderBy: orderBy => {
       dispatch(setOrderBy({ orderBy }));
+      dispatch(setPage({ change: 0 }));
     }
   };
 }

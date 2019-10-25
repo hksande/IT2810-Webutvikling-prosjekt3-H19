@@ -7,7 +7,9 @@ const defaultState = {
 const filterReducer = (state = defaultState, action) => {
   switch (action.type) {
     case SET_PAGE:
-      return { ...state, page: state.page + action.payload.change };
+      return action.payload.change === 0
+        ? defaultState
+        : { ...state, page: state.page + action.payload.change };
     default:
       return state;
   }
