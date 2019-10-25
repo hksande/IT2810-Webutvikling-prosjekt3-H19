@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import gql from "graphql-tag";
+import { useMutation } from "@apollo/react-hooks";
 
 import { changeCount, resetCount } from "../actions/index";
 
@@ -10,6 +12,14 @@ import Tabs from "./Tabs";
 import Header from "./Header";
 import ShoppingDialog from "./ShoppingDialog";
 import ConfirmationSnackBar from "./ConfirmationSnackBar";
+
+const ADD_PURCHASE = gql`
+  mutation addPurchase($name: [String!], $purchased: [Int!]) {
+    addPurchase(name: $name, purchased: $purchased) {
+      name
+    }
+  }
+`;
 
 // To fetch state
 function mapStateToProps(state) {
@@ -36,6 +46,8 @@ function MainContainer(props) {
   const [isDialogOpen, setDialogOpen] = useState(false);
   const [isSnackBarOpen, setSnackBar] = useState(false);
 
+  const [addPurchase, { data }] = useMutation(ADD_PURCHASE);
+
   function changeActiveTab(active) {
     setActiveTab(active);
   }
@@ -47,10 +59,18 @@ function MainContainer(props) {
 
   //Closes shopping cart dialog, confirms purchase, and resets shopping cart
   function confirmPurchase() {
-    setDialogOpen(false);
-    //TODO: Send mutation to db to update purchase history
-    props.resetCount();
-    setSnackBar(true);
+    const name = Object.keys(props.drinks);
+    const purchased = Object.values(props.drinks);
+    addPurchase({
+      variables: {
+        name,
+        purchased
+      }
+    }).then(res => {
+      setDialogOpen(false);
+      props.resetCount();
+      setSnackBar(true);
+    });
   }
 
   function openDialog() {

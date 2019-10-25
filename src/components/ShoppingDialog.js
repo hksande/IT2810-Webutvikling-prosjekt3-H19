@@ -10,6 +10,16 @@ import Button from "@material-ui/core/Button";
 import "./../index.css";
 
 export default function ShoppingDialog(props) {
+  const checkEmpty = () => {
+    let sum = 0;
+    const values = Object.values(props.shoppingCart);
+    if (values.length === 0) {
+      return true;
+    }
+    values.forEach(el => (sum += el));
+    return sum === 0;
+  };
+
   return (
     <Dialog width="md" fullWidth open={props.open}>
       <DialogTitle>Handlekurv</DialogTitle>
@@ -39,7 +49,12 @@ export default function ShoppingDialog(props) {
           <Button color="primary" onClick={props.closeDialog}>
             Fortsett å handle
           </Button>
-          <Button color="primary" variant="contained" onClick={props.confirm}>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={props.confirm}
+            disabled={checkEmpty()}
+          >
             Bekreft kjøp
           </Button>
         </div>
