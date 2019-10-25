@@ -50,22 +50,19 @@ export const typeDefs = gql`
     description: String!
   }
 
-  input ProductWhereInput {
-    name_in: [String!]
-  }
-  input ProductUpdateInput {
-    name: String!
-    type: String
-    price: Int
-    purchased: Int
-    origin: String
-    img: String
-    description: String
+  input ProductWhereUniqueInput {
+    id: ID
+    name: String
   }
 
-  type ProductResult {
-    products: [Product]
-    totalCount: Int
+  type Purchase {
+    name: String!
+    purchased: Int!
+  }
+
+  input ProductUpdateInput {
+    name: String!
+    purchased: Int!
   }
 
   type Query {
@@ -95,11 +92,11 @@ export const typeDefs = gql`
       img: String!
       description: String!
     ): Product!
-    addPurchase(data: [ProductUpdateInput!], where: String): Product!
-    updateManyProducts(
-      data: ProductUpdateInput
-      where: ProductWhereInput
-    ): [Product!]
+    addPurchase(name: [String!], purchased: [Int!]): [Product!]
+    updateProduct(
+      data: ProductUpdateInput!
+      where: ProductWhereUniqueInput!
+    ): Product
   }
 `;
 
@@ -163,27 +160,31 @@ export const resolvers = {
         info
       );
     },
-    /*
     addPurchase: async (parent, args, context, info) => {
-      const data = await context.db.query.product({
-        where: { name: args.name },
+      const data = await context.db.query.products({
+        where: { name_in: args.name },
         info
       });
-      return context.db.mutation.updateProduct(
-        {
-          data: {
-            purchased: data.purchased + args.purchased
+      console.log(data);
+      console.log(data.length);
+      for (var i = 0; i < data.length; i++) {
+        console.log("hei");
+        await context.db.mutation.updateProduct(
+          {
+            data: {
+              purchased: parseInt(data[i].purchased) + args.purchased[i]
+            },
+            where: {
+              name: args.name[i]
+            }
           },
-          where: {
-            name: args.name
-          }
-        },
-        info
-      );
+          info
+        );
+      }
     }
   }
-}*/
-    /*
+};
+/*
     addPurchase: async (parent, args, context, info) => {
       //args.prototype.forEach.call(args, pname => {
       const updatedPurchase = await Promise.all(
@@ -209,23 +210,31 @@ export const resolvers = {
     }
   }
 };
-*/
     updateManyProducts: async (parent, args, context, info) => {
-      const data = await context.db.query.product({
-        where: { name_in: args.name },
-        info
-      });
-      return context.db.mutation.updateManyProducts(
-        {
-          data: {
-            purchased: data.purchased + args[name]
+      for (var key in args) {
+        //var value = args[key];
+        const data = await context.db.query.product({
+          where: { name: key },
+          info
+        });
+        return context.db.mutation.updateManyProducts(
+          {
+            data: {
+              purchased: data.purchased + args[key]
+            },
+            where: {
+              name: key
+            }
           },
-          where: {
-            name: args.name
-          }
-        },
-        info
-      );
+          info
+        );
+      }
     }
   }
 };
+/*
+export var dict = {
+  "Agostino Barb d'Asti Superiore Moliss": 2,
+  "Alta Alella Laietà Gran Reserva Brut Nature 2013": 1
+};
+*/
