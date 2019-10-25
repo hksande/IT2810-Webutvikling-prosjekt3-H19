@@ -28,8 +28,8 @@ const filterList = [
   ["Siste nytt", null],
   ["Pris stigende", "price_ASC"],
   ["Pris synkende", "price_DESC"],
-  ["Navn stigende", "name_ASC"],
-  ["Navn synkende", "name_DESC"]
+  ["Alfabetisk", "name_ASC"],
+  ["Reversert alfabetisk", "name_DESC"]
 ];
 
 const StyledMenu = withStyles({
@@ -91,7 +91,7 @@ function FilterMenu(props) {
           onClick={handleClick}
           endIcon={<FilterList />}
           size="large"
-          data-cy = 'drop'
+          data-cy="drop"
         >
           {activeFilter}
         </Button>
@@ -102,7 +102,7 @@ function FilterMenu(props) {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
-        data-cy= 'shopping'
+        data-cy="shopping"
       >
         {filterList.map((el, index) => {
           return (
