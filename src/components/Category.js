@@ -34,11 +34,13 @@ function Category(props) {
           return (
             <li
               key={index}
+              data-cy = {el}
               className={
                 el === props.typeFilter ? "active list-item" : "list-item"
               }
               data-div_name={el}
               onClick={handleCategoryClick}
+              
             >
               {el === null ? "Alle produkter" : el}
             </li>

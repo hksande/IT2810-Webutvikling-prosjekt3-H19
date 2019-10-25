@@ -106,7 +106,7 @@ function AllProductsContainer(props) {
     );
   if (error) return `${error} Det har skjedd en feil :(`;
 
-  console.log(data[dataName].length);
+  //console.log(data[dataName].length);
   return (
     <List
       productsPerPage={PRODUCTS_PER_PAGE}
