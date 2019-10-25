@@ -89,8 +89,7 @@ function AllProductsContainer(props) {
     filter === null ? { ...variables } : { ...variables, type: filter };
 
   const { data, fetchMore, loading, error } = useQuery(query, {
-    variables: variables,
-    fetchPolicy: "cache-and-network"
+    variables: variables
   });
 
   if (loading)
@@ -120,24 +119,20 @@ function AllProductsContainer(props) {
       data-cy="list"
       fetchMore={fetchMore}
       query={query}
-      /*
-      onLoadMore={() => {
+      onLoadMore={newPage => {
         return fetchMore({
+          query: query,
           variables: {
-            skip: data[dataName].length
+            ...variables,
+            first: PRODUCTS_PER_PAGE,
+            skip: (newPage - 1) * PRODUCTS_PER_PAGE
           },
           updateQuery: (prev, { fetchMoreResult }) => {
-            if (!fetchMoreResult) {
-              console.log("no more results");
-              return prev;
-            }
-            console.log("More results :)");
-            return Object.assign({}, prev, {
-              content: [...prev[dataName], ...fetchMoreResult[dataName]]
-            });
+            if (!fetchMoreResult) return prev;
+            return fetchMoreResult;
           }
         });
-      }}*/
+      }}
     />
   );
 }

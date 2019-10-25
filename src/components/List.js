@@ -8,39 +8,26 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import Divider from "@material-ui/core/Divider";
 import Tooltip from "@material-ui/core/Tooltip";
-import Button from "@material-ui/core/Button";
+import Pagination from "./Pagination";
 import "./../index.css";
 
 export default function ControlledExpansionPanels(props) {
   const [expanded, setExpanded] = useState(false);
-
-  // Scroll to the top when paginating
-  useEffect(() => {
-    window.scrollTo(500, 500);
-  }, []);
 
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
   const handleLoadMore = () => {
-    console.log(props.currentPage);
-    props
-      .fetchMore({
-        query: props.query,
-        variables: {
-          first: props.productsPerPage,
-          skip: props.currentPage * props.productsPerPage
-        },
-        updateQuery: (prev, { fetchMoreResult }) => {
-          if (!fetchMoreResult) return prev;
-          return fetchMoreResult;
-        }
-      })
-      .then(res => {
-        const newPage = props.currentPage + 1;
-        props.setCurrentPage(newPage);
-      });
+    const newPage = props.currentPage + 1;
+    props.setCurrentPage(newPage);
+    props.onLoadMore(newPage);
+  };
+
+  const handleLoadLess = () => {
+    const newPage = props.currentPage - 1;
+    props.setCurrentPage(newPage);
+    props.onLoadMore(newPage);
   };
 
   function handleIncrement(e) {
@@ -52,6 +39,8 @@ export default function ControlledExpansionPanels(props) {
     props.changeCount(e.currentTarget.dataset.div_name, -1);
     e.preventDefault();
   }
+
+  console.log(props.content);
 
   return (
     <div className="list">
@@ -122,9 +111,11 @@ export default function ControlledExpansionPanels(props) {
           </ExpansionPanel>
         );
       })}
-      <Button variant="contained" onClick={handleLoadMore}>
-        Last mer
-      </Button>
+      <Pagination
+        navigateForward={handleLoadMore}
+        navigateBackward={handleLoadLess}
+        currentPage={props.currentPage}
+      />
     </div>
   );
 }
