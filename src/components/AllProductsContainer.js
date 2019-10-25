@@ -74,9 +74,6 @@ function mapStateToProps(state) {
 }
 
 function AllProductsContainer(props) {
-
-  console.log(props.page);
-
   // Decide which query and variables to use:
   const filter = props.typeFilter;
   const query = filter === null ? ALL_PRODUCTS : GET_PRODUCTS_BY_TYPE;
@@ -113,7 +110,8 @@ function AllProductsContainer(props) {
   return (
     <List
       productsPerPage={PRODUCTS_PER_PAGE}
-      content={data[dataName]}
+      content={data[dataName].slice(0, 10)}
+      hasNextPage={data[dataName].length < 11}
       changeCount={props.changeCount}
       drinks={props.drinks}
       data-cy="list"
@@ -122,7 +120,7 @@ function AllProductsContainer(props) {
           query: query,
           variables: {
             ...variables,
-            first: PRODUCTS_PER_PAGE,
+            first: PRODUCTS_PER_PAGE + 1,
             skip: (props.page - 1) * PRODUCTS_PER_PAGE
           },
           updateQuery: (prev, { fetchMoreResult }) => {

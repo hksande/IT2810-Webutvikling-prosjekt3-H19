@@ -101,6 +101,7 @@ export default function ControlledExpansionPanels(props) {
       })}
       <Pagination
         navigate={props.onLoadMore}
+        hasNextPage={props.hasNextPage}
       />
     </div>
   );

@@ -27,6 +27,8 @@ function Pagination(props) {
     props.navigate();
   }, [props.page]);
 
+  console.log(props.hasNextPage);
+
   return (
     <div className="pagination-bar">
       <Button
@@ -43,6 +45,7 @@ function Pagination(props) {
       <h2 style={{ margin: "15px 15px" }}>{props.page}</h2>
       <Button
         variant="contained"
+        disabled={props.hasNextPage}
         endIcon={<ArrowForward />}
         onClick={() => {
           props.setPage(1);
