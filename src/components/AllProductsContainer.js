@@ -1,13 +1,27 @@
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
-import React from "react";
+import React, { useState } from "react";
 import List from "./List";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { connect } from "react-redux";
 
+const PRODUCTS_PER_PAGE = 10;
+
+// Query to fetch all products:
+
 const ALL_PRODUCTS = gql`
-  query allProducts($searchString: String, $orderBy: ProductOrderByInput) {
-    allProducts(searchString: $searchString, orderBy: $orderBy) {
+  query allProducts(
+    $searchString: String
+    $orderBy: ProductOrderByInput
+    $first: Int
+    $skip: Int
+  ) {
+    allProducts(
+      searchString: $searchString
+      orderBy: $orderBy
+      first: $first
+      skip: $skip
+    ) {
       name
       id
       type
@@ -20,16 +34,22 @@ const ALL_PRODUCTS = gql`
   }
 `;
 
+// Query to fetch products based on type:
+
 const GET_PRODUCTS_BY_TYPE = gql`
   query getProductsByType(
     $searchString: String
     $orderBy: ProductOrderByInput
     $type: String
+    $first: Int
+    $skip: Int
   ) {
     getProductsByType(
       searchString: $searchString
       orderBy: $orderBy
       type: $type
+      first: $first
+      skip: $skip
     ) {
       name
       id
@@ -46,24 +66,28 @@ const GET_PRODUCTS_BY_TYPE = gql`
 function mapStateToProps(state) {
   return {
     drinks: state.products.drinks,
-    orderBy: state.products.orderBy,
-    searchString: state.products.searchString,
-    typeFilter: state.products.typeFilter
+    orderBy: state.filter.orderBy,
+    searchString: state.filter.searchString,
+    typeFilter: state.filter.typeFilter,
+    page: state.pagination.page
   };
 }
 
 function AllProductsContainer(props) {
+  // Decide which query and variables to use:
   const filter = props.typeFilter;
   const query = filter === null ? ALL_PRODUCTS : GET_PRODUCTS_BY_TYPE;
   const dataName = filter === null ? "allProducts" : "getProductsByType";
   let variables = {
     searchString: props.searchString,
-    orderBy: props.orderBy
+    orderBy: props.orderBy,
+    first: PRODUCTS_PER_PAGE,
+    skip: 0
   };
   variables =
     filter === null ? { ...variables } : { ...variables, type: filter };
 
-  const { data, loading, error } = useQuery(query, {
+  const { data, fetchMore, loading, error } = useQuery(query, {
     variables: variables
   });
 
@@ -80,15 +104,31 @@ function AllProductsContainer(props) {
         <CircularProgress color="primary" disableShrink />
       </div>
     );
-  if (error) return `Det har skjedd en feil :(`;
+  if (error) return `${error} Det har skjedd en feil :(`;
 
-  console.log(data);
+  console.log(data[dataName].length);
   return (
     <List
-      content={data[dataName]}
+      productsPerPage={PRODUCTS_PER_PAGE}
+      content={data[dataName].slice(0, 10)}
+      hasNextPage={data[dataName].length < 11}
       changeCount={props.changeCount}
       drinks={props.drinks}
-      data-cy = "list"
+      data-cy="list"
+      onLoadMore={() => {
+        return fetchMore({
+          query: query,
+          variables: {
+            ...variables,
+            first: PRODUCTS_PER_PAGE + 1,
+            skip: (props.page - 1) * PRODUCTS_PER_PAGE
+          },
+          updateQuery: (prev, { fetchMoreResult }) => {
+            if (!fetchMoreResult) return prev;
+            return fetchMoreResult;
+          }
+        });
+      }}
     />
   );
 }

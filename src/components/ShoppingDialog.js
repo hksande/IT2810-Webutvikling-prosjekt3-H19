@@ -17,9 +17,8 @@ export default function ShoppingDialog(props) {
         <ul className="shopping-cart-list">
           {Object.keys(props.shoppingCart).map((key, index) => {
             return props.shoppingCart[key] === 0 ? null : (
-              <div>
+              <div key={key}>
                 <li
-                  key={key}
                   style={{
                     display: "flex",
                     justifyContent: "space-between",

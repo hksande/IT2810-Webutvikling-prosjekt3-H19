@@ -61,7 +61,7 @@ export default class Map extends Component {
 
   render() {
     const { current } = this.state;
-    const top = this.props.data.slice(0, 10);
+    const top = this.props.data;
     return (
       <div>
         <h1 className="top-products-header">Mest populære produkter</h1>

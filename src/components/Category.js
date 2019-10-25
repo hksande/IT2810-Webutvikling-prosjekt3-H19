@@ -1,20 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import "./../index.css";
 import { connect } from "react-redux";
-import { setTypeFilter } from "./../actions/index";
-
+import { setTypeFilter, setPage } from "./../actions/index";
 
 function mapDispatchToProps(dispatch) {
   return {
     setTypeFilter: typeFilter => {
       dispatch(setTypeFilter({ typeFilter }));
+      dispatch(setPage({ change: 0 }));
     }
   };
 }
 
 function mapStateToProps(state) {
   return {
-    typeFilter: state.products.typeFilter
+    typeFilter: state.filter.typeFilter
   };
 }
 

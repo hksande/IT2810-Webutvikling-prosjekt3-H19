@@ -8,6 +8,7 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import Divider from "@material-ui/core/Divider";
 import Tooltip from "@material-ui/core/Tooltip";
+import Pagination from "./Pagination";
 import "./../index.css";
 
 export default function ControlledExpansionPanels(props) {
@@ -27,19 +28,21 @@ export default function ControlledExpansionPanels(props) {
     e.preventDefault();
   }
 
+  console.log(props.content);
+
   return (
-    <div className="list">
+    <div>
       {props.content.map((el, index) => {
         return (
           <ExpansionPanel
             expanded={expanded === index}
             onChange={handleChange(index)}
             key={el.name}
-            data-cy = "expansion"
+            data-cy="expansion"
           >
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
               <div className="grid-container-product-summary">
-                <img src={el.img} className="product-image"></img>
+                <img src={el.img} alt="Produkt" className="product-image"></img>
                 <div
                   style={{
                     overflow: "hidden"
@@ -71,18 +74,20 @@ export default function ControlledExpansionPanels(props) {
                   </Tooltip>
                   <h2>{el.name in props.drinks ? props.drinks[el.name] : 0}</h2>
                   <Tooltip title="Fjern fra handlekurv">
-                    <IconButton
-                      variant="contained"
-                      color="primary"
-                      data-div_name={el.name}
-                      onClick={handleDecrement}
-                      disabled={
-                        !(el.name in props.drinks) ||
-                        props.drinks[el.name] === 0
-                      }
-                    >
-                      <RemoveIcon />
-                    </IconButton>
+                    <span>
+                      <IconButton
+                        variant="contained"
+                        color="primary"
+                        data-div_name={el.name}
+                        onClick={handleDecrement}
+                        disabled={
+                          !(el.name in props.drinks) ||
+                          props.drinks[el.name] === 0
+                        }
+                      >
+                        <RemoveIcon />
+                      </IconButton>
+                    </span>
                   </Tooltip>
                 </div>
                 <p className="product-description">
@@ -94,6 +99,10 @@ export default function ControlledExpansionPanels(props) {
           </ExpansionPanel>
         );
       })}
+      <Pagination
+        navigate={props.onLoadMore}
+        hasNextPage={props.hasNextPage}
+      />
     </div>
   );
 }

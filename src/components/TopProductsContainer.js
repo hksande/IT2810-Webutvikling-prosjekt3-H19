@@ -9,7 +9,7 @@ import Map from "./Map";
 
 const GET_TOP_PRODUCTS = gql`
   {
-    allProducts(searchString: "", orderBy: purchased_DESC) {
+    allProducts(searchString: "", orderBy: purchased_DESC, first: 10) {
       name
       purchased
       origin

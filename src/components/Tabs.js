@@ -22,7 +22,7 @@ import { connect } from "react-redux";
 
 function mapStateToProps(state) {
   return {
-    typeFilter: state.products.typeFilter
+    typeFilter: state.filter.typeFilter
   };
 }
 
