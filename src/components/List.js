@@ -43,7 +43,7 @@ export default function ControlledExpansionPanels(props) {
   console.log(props.content);
 
   return (
-    <div className="list">
+    <div>
       {props.content.map((el, index) => {
         return (
           <ExpansionPanel

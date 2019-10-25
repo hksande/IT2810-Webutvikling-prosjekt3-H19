@@ -81,7 +81,7 @@ function FilterMenu(props) {
 
   return (
     <div>
-      <Tooltip title="Filtrer på">
+      <Tooltip title="Sorter på">
         <Button
           aria-controls="customized-menu"
           aria-haspopup="true"

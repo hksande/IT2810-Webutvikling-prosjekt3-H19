@@ -34,10 +34,6 @@ code {
   margin: 0 13vw;
 }
 
-.list {
-  background-color: whitesmoke;
-}
-
 .grid-container {
   display: grid;
   width: 100%;
