@@ -19,7 +19,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    orderBy: state.products.orderBy
+    orderBy: state.filter.orderBy
   };
 }
 

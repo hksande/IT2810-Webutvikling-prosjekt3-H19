@@ -13,7 +13,7 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    typeFilter: state.products.typeFilter
+    typeFilter: state.filter.typeFilter
   };
 }
 

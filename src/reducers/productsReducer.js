@@ -1,17 +1,11 @@
 import {
   CHANGE_COUNT,
-  RESET_COUNT,
-  SET_ORDER_BY,
-  SET_SEARCH,
-  SET_TYPE_FILTER
+  RESET_COUNT
 } from "../constants/actionTypes";
 
 const defaultState = {
   count: 0,
-  drinks: {},
-  orderBy: null,
-  searchString: null,
-  typeFilter: null
+  drinks: {}
 };
 
 const productsReducer = (state = defaultState, action) => {
@@ -24,7 +18,7 @@ const productsReducer = (state = defaultState, action) => {
         return {
           ...state,
           drinks: { ...state.drinks, ...newCount },
-          count: state.count + +action.payload.change
+          count: state.count + action.payload.change
         };
       } else {
         const newCount = {};
@@ -32,23 +26,11 @@ const productsReducer = (state = defaultState, action) => {
         return {
           ...state,
           drinks: { ...state.drinks, ...newCount },
-          count: state.count + +action.payload.change
+          count: state.count + action.payload.change
         };
       }
     case RESET_COUNT:
       return defaultState;
-    case SET_ORDER_BY:
-      return { ...state, orderBy: action.payload.orderBy };
-    case SET_SEARCH:
-      return { ...state, searchString: action.payload.searchString };
-    case SET_TYPE_FILTER:
-      return {
-        ...state,
-        typeFilter:
-          action.payload.typeFilter === undefined
-            ? null
-            : action.payload.typeFilter
-      };
     default:
       return state;
   }

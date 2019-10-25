@@ -66,9 +66,9 @@ const GET_PRODUCTS_BY_TYPE = gql`
 function mapStateToProps(state) {
   return {
     drinks: state.products.drinks,
-    orderBy: state.products.orderBy,
-    searchString: state.products.searchString,
-    typeFilter: state.products.typeFilter
+    orderBy: state.filter.orderBy,
+    searchString: state.filter.searchString,
+    typeFilter: state.filter.typeFilter
   };
 }
 
@@ -117,8 +117,6 @@ function AllProductsContainer(props) {
       changeCount={props.changeCount}
       drinks={props.drinks}
       data-cy="list"
-      fetchMore={fetchMore}
-      query={query}
       onLoadMore={newPage => {
         return fetchMore({
           query: query,
