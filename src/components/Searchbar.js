@@ -65,11 +65,13 @@ function SearchBar(props) {
         value={searchValue}
         onChange={handleSearchChange}
         onKeyPress={handleSearchKeyPress}
+        data-cy="input"
       />
       <IconButton
         className={classes.iconButton}
         aria-label="search"
         onClick={search}
+        id = 'SearchButton'
       >
         <SearchIcon />
       </IconButton>

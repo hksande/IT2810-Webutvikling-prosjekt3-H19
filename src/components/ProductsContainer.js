@@ -75,6 +75,7 @@ function ProductsContainer(props) {
       content={data[dataName]}
       changeCount={props.changeCount}
       drinks={props.drinks}
+      data-cy = "list"
     />
   );
 }

@@ -88,6 +88,7 @@ function FilterMenu(props) {
         onClick={handleClick}
         endIcon={<Filter_List />}
         size="large"
+        id = "ToggleButton"
       >
         {activeFilter}
       </Button>

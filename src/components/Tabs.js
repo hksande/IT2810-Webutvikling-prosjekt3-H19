@@ -58,8 +58,8 @@ export default function SimpleTabs(props) {
           aria-label="simple tabs example"
           centered
         >
-          <Tab label="Liste med alkohol" {...a11yProps(0)} />
-          <Tab label="Mest kjøpte" {...a11yProps(1)} />
+          <Tab label="Liste med alkohol" className= "tab1" data-cy = "tab1" {...a11yProps(0)} />
+          <Tab label="Mest kjøpte" className = "tab2" data-cy = "tab2" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>

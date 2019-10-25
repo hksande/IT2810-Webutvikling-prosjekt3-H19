@@ -33,6 +33,7 @@ export default function ControlledExpansionPanels(props) {
             expanded={expanded === index}
             onChange={handleChange(index)}
             key={el.name}
+            data-cy = "expansion"
           >
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
               <div className="grid-containerflex-header">
@@ -64,6 +65,7 @@ export default function ControlledExpansionPanels(props) {
                     color="primary"
                     data-div_name={el.name}
                     onClick={handleIncrement}
+                    data-cy = "increment"
                   >
                     <AddIcon />
                   </IconButton>

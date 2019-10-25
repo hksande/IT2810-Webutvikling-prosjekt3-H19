@@ -15,7 +15,7 @@ export default function Header(props) {
         <Typography variant="h4">Vinmonopolet</Typography>
         <Tooltip title="Handlekurv">
           <Badge badgeContent={props.count} color="secondary">
-            <IconButton color="inherit" aria-label="shopping-cart" onClick={props.openDialog}>
+            <IconButton color="inherit" aria-label="shopping-cart" onClick={props.openDialog} data-cy="shopping">
               <ShoppingCartIcon />
             </IconButton>
           </Badge>
