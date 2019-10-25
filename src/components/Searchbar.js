@@ -4,13 +4,14 @@ import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
-import { setSearch } from "./../actions/index";
+import { setSearch, setPage } from "./../actions/index";
 import { connect } from "react-redux";
 
 function mapDispatchToProps(dispatch) {
   return {
     setSearch: searchString => {
       dispatch(setSearch({ searchString }));
+      dispatch(setPage({ change: 0 }));
     }
   };
 }
@@ -71,7 +72,7 @@ function SearchBar(props) {
         className={classes.iconButton}
         aria-label="search"
         onClick={search}
-        id = 'SearchButton'
+        id="SearchButton"
       >
         <SearchIcon />
       </IconButton>
