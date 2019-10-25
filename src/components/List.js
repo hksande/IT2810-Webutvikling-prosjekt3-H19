@@ -35,6 +35,7 @@ export default function ControlledExpansionPanels(props) {
             expanded={expanded === index}
             onChange={handleChange(index)}
             key={el.name}
+            data-cy = "expansion"
           >
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
               <div className="grid-container-product-summary">
