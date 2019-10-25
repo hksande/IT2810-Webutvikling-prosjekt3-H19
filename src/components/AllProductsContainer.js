@@ -2,6 +2,7 @@ import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import React from "react";
 import List from "./List";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { connect } from "react-redux";
 
 const ALL_PRODUCTS = gql`
@@ -51,7 +52,7 @@ function mapStateToProps(state) {
   };
 }
 
-function ProductsContainer(props) {
+function AllProductsContainer(props) {
   const filter = props.typeFilter;
   const query = filter === null ? ALL_PRODUCTS : GET_PRODUCTS_BY_TYPE;
   const dataName = filter === null ? "allProducts" : "getProductsByType";
@@ -66,8 +67,20 @@ function ProductsContainer(props) {
     variables: variables
   });
 
-  if (loading) return "Loading...";
-  if (error) return `Error! ${error.message}`;
+  if (loading)
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          margin: "40vh 0"
+        }}
+      >
+        <CircularProgress color="primary" disableShrink />
+      </div>
+    );
+  if (error) return `Det har skjedd en feil :(`;
 
   console.log(data);
   return (
@@ -80,4 +93,4 @@ function ProductsContainer(props) {
   );
 }
 
-export default connect(mapStateToProps)(ProductsContainer);
+export default connect(mapStateToProps)(AllProductsContainer);

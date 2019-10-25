@@ -1,12 +1,12 @@
+import React from "react";
+
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import Dialog from "@material-ui/core/Dialog";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
+import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
-import React from "react";
+
 import "./../index.css";
 
 export default function ShoppingDialog(props) {
@@ -14,20 +14,26 @@ export default function ShoppingDialog(props) {
     <Dialog width="md" fullWidth open={props.open}>
       <DialogTitle>Handlekurv</DialogTitle>
       <DialogContent dividers>
-        <List>
+        <ul className="shopping-cart-list">
           {Object.keys(props.shoppingCart).map((key, index) => {
-            return props.shoppingCart[key] === 0 ? (
-              <div key={key} />
-            ) : (
-              <ListItem key={key}>
-                <ListItemText
-                  primary={key}
-                  secondary={props.shoppingCart[key]}
-                />
-              </ListItem>
+            return props.shoppingCart[key] === 0 ? null : (
+              <div>
+                <li
+                  key={key}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    margin: "0 40px"
+                  }}
+                >
+                  <p>{key}</p>
+                  <p style={{ color: "gray" }}>{props.shoppingCart[key]}</p>
+                </li>
+                <Divider />
+              </div>
             );
           })}
-        </List>
+        </ul>
       </DialogContent>
       <DialogActions>
         <div className="flex-container-space-between">

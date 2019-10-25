@@ -1,9 +1,14 @@
 import React from "react";
-
-import Container from "./components/Container";
+import MainContainer from "./components/MainContainer";
+import { ThemeProvider } from "@material-ui/core/styles";
+import theme from "./theme";
 
 function App() {
-  return <Container />;
+  return (
+    <ThemeProvider theme={theme}>
+      <MainContainer />
+    </ThemeProvider>
+  );
 }
 
 export default App;

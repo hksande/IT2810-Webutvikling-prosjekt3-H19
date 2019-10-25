@@ -6,16 +6,15 @@ import {
   SET_TYPE_FILTER
 } from "../constants/actionTypes";
 
-const productsReducer = (
-  state = {
-    count: 0,
-    drinks: {},
-    orderBy: null,
-    searchString: null,
-    typeFilter: null
-  },
-  action
-) => {
+const defaultState = {
+  count: 0,
+  drinks: {},
+  orderBy: null,
+  searchString: null,
+  typeFilter: null
+};
+
+const productsReducer = (state = defaultState, action) => {
   switch (action.type) {
     case CHANGE_COUNT:
       if (state.drinks[action.payload.name]) {
@@ -37,16 +36,19 @@ const productsReducer = (
         };
       }
     case RESET_COUNT:
-      return {
-        count: 0,
-        drinks: {}
-      };
+      return defaultState;
     case SET_ORDER_BY:
       return { ...state, orderBy: action.payload.orderBy };
     case SET_SEARCH:
       return { ...state, searchString: action.payload.searchString };
     case SET_TYPE_FILTER:
-      return { ...state, typeFilter: action.payload.typeFilter };
+      return {
+        ...state,
+        typeFilter:
+          action.payload.typeFilter === undefined
+            ? null
+            : action.payload.typeFilter
+      };
     default:
       return state;
   }

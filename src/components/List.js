@@ -6,6 +6,8 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
+import Divider from "@material-ui/core/Divider";
+import Tooltip from "@material-ui/core/Tooltip";
 import "./../index.css";
 
 export default function ControlledExpansionPanels(props) {
@@ -36,40 +38,57 @@ export default function ControlledExpansionPanels(props) {
             data-cy = "expansion"
           >
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <div className="grid-containerflex-header">
-                  <h3 className="list-header">{el.name}</h3>
-                  <h5 className="list-price">{el.price} kr</h5>
+              <div className="grid-container-product-summary">
+                <img src={el.img} className="product-image"></img>
+                <div
+                  style={{
+                    overflow: "hidden"
+                  }}
+                >
+                  <h3 className="product-name">{el.name}</h3>
+                  <p>
+                    <i>Kr. {el.price}</i>
+                  </p>
+                </div>
               </div>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-              <div className="grid-container-expansion-panel">
-                <div className="purchase-info yellow-border">
-                    <img src = {el.img} className = "image"></img>
-                </div>
-                <p className="yellow-border">{el.description}</p>
-                <div className="yellow-border add-to-cart">
-                  <IconButton
-                    variant="contained"
-                    color="primary"
-                    data-div_name={el.name}
-                    onClick={handleDecrement}
-                    disabled={
-                      !(el.name in props.drinks) || props.drinks[el.name] === 0
-                    }
-                  >
-                    <RemoveIcon />
-                  </IconButton>
+              <Divider />
+              <div className="grid-container-product-details ">
+                <p className="product-origin">
+                  <b>Land: </b> {el.origin}
+                </p>
+                <div className="product-add">
+                  <Tooltip title="Legg til i handlekurv">
+                    <IconButton
+                      variant="contained"
+                      color="primary"
+                      data-div_name={el.name}
+                      onClick={handleIncrement}
+                    >
+                      <AddIcon />
+                    </IconButton>
+                  </Tooltip>
                   <h2>{el.name in props.drinks ? props.drinks[el.name] : 0}</h2>
-                  <IconButton
-                    variant="contained"
-                    color="primary"
-                    data-div_name={el.name}
-                    onClick={handleIncrement}
-                    data-cy = "increment"
-                  >
-                    <AddIcon />
-                  </IconButton>
+                  <Tooltip title="Fjern fra handlekurv">
+                    <IconButton
+                      variant="contained"
+                      color="primary"
+                      data-div_name={el.name}
+                      onClick={handleDecrement}
+                      disabled={
+                        !(el.name in props.drinks) ||
+                        props.drinks[el.name] === 0
+                      }
+                    >
+                      <RemoveIcon />
+                    </IconButton>
+                  </Tooltip>
                 </div>
+                <p className="product-description">
+                  <b>Smak: </b>
+                  <i>{el.description}</i>
+                </p>
               </div>
             </ExpansionPanelDetails>
           </ExpansionPanel>

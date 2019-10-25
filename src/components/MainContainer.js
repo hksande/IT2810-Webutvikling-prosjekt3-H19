@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 
-import { changeCount, resetCount } from "./../actions/index";
+import { changeCount, resetCount } from "../actions/index";
 
 import Paper from "@material-ui/core/Paper";
 import "./../index.css";
@@ -30,7 +30,8 @@ function mapDispatchToProps(dispatch) {
     }
   };
 }
-function Container(props) {
+
+function MainContainer(props) {
   const [activeTab, setActiveTab] = useState("0");
   const [isDialogOpen, setDialogOpen] = useState(false);
   const [isSnackBarOpen, setSnackBar] = useState(false);
@@ -58,13 +59,15 @@ function Container(props) {
 
   return (
     <div>
-      <Header count={props.count} openDialog={openDialog} />
+      <Header />
       <Paper className="paper">
         <Tabs
           changeActiveTab={changeActiveTab}
           active={activeTab}
           changeCount={props.changeCount}
           content={props.drinks}
+          count={props.count}
+          openDialog={openDialog}
         />
       </Paper>
 
@@ -86,4 +89,4 @@ function Container(props) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Container);
+)(MainContainer);

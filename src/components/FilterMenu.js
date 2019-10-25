@@ -5,6 +5,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Filter_List from "@material-ui/icons/FilterList";
+import Tooltip from "@material-ui/core/Tooltip";
 import { setOrderBy } from "./../actions/index";
 import { connect } from "react-redux";
 
@@ -22,8 +23,8 @@ function mapStateToProps(state) {
   };
 }
 
-const filterList = [
-  ["------------", null],
+const FILTER_LIST = [
+  ["Siste nytt", null],
   ["Pris stigende", "price_ASC"],
   ["Pris synkende", "price_DESC"],
   ["Navn stigende", "name_ASC"],
@@ -63,7 +64,7 @@ const StyledMenuItem = withStyles(theme => ({
 
 function FilterMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [activeFilter, setActiveFilter] = React.useState("------------");
+  const [activeFilter, setActiveFilter] = React.useState("Siste nytt");
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -74,24 +75,25 @@ function FilterMenu(props) {
   };
 
   const handleMenuClick = e => {
-    setActiveFilter(filterList[e.currentTarget.dataset.div_index][0]);
-    props.setOrderBy(filterList[e.currentTarget.dataset.div_index][1]);
+    setActiveFilter(FILTER_LIST[e.currentTarget.dataset.div_index][0]);
+    props.setOrderBy(FILTER_LIST[e.currentTarget.dataset.div_index][1]);
   };
 
   return (
     <div>
-      <Button
-        aria-controls="customized-menu"
-        aria-haspopup="true"
-        variant="contained"
-        color="default"
-        onClick={handleClick}
-        endIcon={<Filter_List />}
-        size="large"
-        id = "ToggleButton"
-      >
-        {activeFilter}
-      </Button>
+      <Tooltip title="Filtrer på">
+        <Button
+          aria-controls="customized-menu"
+          aria-haspopup="true"
+          variant="contained"
+          color="default"
+          onClick={handleClick}
+          endIcon={<Filter_List />}
+          size="large"
+        >
+          {activeFilter}
+        </Button>
+      </Tooltip>
       <StyledMenu
         id="customized-menu"
         anchorEl={anchorEl}
@@ -99,7 +101,7 @@ function FilterMenu(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {filterList.map((el, index) => {
+        {FILTER_LIST.map((el, index) => {
           return (
             <StyledMenuItem
               key={index}

@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     padding: "3px 4px",
     display: "flex",
     alignItems: "center",
-    width: 400
+    width: "300px"
   },
   input: {
     marginLeft: theme.spacing(1),
@@ -60,7 +60,7 @@ function SearchBar(props) {
     <Paper className={classes.root}>
       <InputBase
         className={classes.input}
-        placeholder="Søk drikkevarer"
+        placeholder="Søk i drikkevarer"
         inputProps={{ "aria-label": "search google maps" }}
         value={searchValue}
         onChange={handleSearchChange}

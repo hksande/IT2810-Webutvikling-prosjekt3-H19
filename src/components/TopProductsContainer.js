@@ -1,7 +1,10 @@
+import React from "react";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
-import React from "react";
 import { connect } from "react-redux";
+
+import CircularProgress from "@material-ui/core/CircularProgress";
+
 import Map from "./Map";
 
 const GET_TOP_PRODUCTS = gql`
@@ -25,8 +28,20 @@ function TopProductsContainer() {
     variables: {}
   });
 
-  if (loading) return "Loading...";
-  if (error) return `Error! ${error.message}`;
+  if (loading)
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          margin: "40vh 0"
+        }}
+      >
+        <CircularProgress color="primary" disableShrink />
+      </div>
+    );
+  if (error) return "Det har skjedd en feil :(";
 
   return <Map data={data.allProducts} />;
 }
