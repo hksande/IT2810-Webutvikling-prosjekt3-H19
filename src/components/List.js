@@ -12,17 +12,20 @@ import "./../index.css";
 
 export default function ControlledExpansionPanels(props) {
   const [expanded, setExpanded] = useState(false);
+  const [counter, setCounter] = useState(0);
 
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
   function handleIncrement(e) {
+    setCounter(counter++);
     props.changeCount(e.currentTarget.dataset.div_name, 1);
     e.preventDefault();
   }
 
   function handleDecrement(e) {
+    setCounter(counter--);
     props.changeCount(e.currentTarget.dataset.div_name, -1);
     e.preventDefault();
   }
@@ -45,7 +48,7 @@ export default function ControlledExpansionPanels(props) {
                     overflow: "hidden"
                   }}
                 >
-                  <h3 className="product-name">{el.name}</h3>
+                  <h3 data-cy = 'tekst' className="product-name">{el.name}</h3>
                   <p>
                     <i>Kr. {el.price}</i>
                   </p>
@@ -61,6 +64,7 @@ export default function ControlledExpansionPanels(props) {
                 <div className="product-add">
                   <Tooltip title="Legg til i handlekurv">
                     <IconButton
+                      className = "increment"
                       variant="contained"
                       color="primary"
                       data-div_name={el.name}

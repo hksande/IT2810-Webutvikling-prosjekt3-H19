@@ -72,8 +72,8 @@ function SimpleTabs(props) {
           aria-label="simple tabs example"
           centered
         >
-          <Tab label="Drikkevarer" {...a11yProps(0)} />
-          <Tab label="Mest populære" {...a11yProps(1)} />
+          <Tab label="Drikkevarer" data-cy= "tab1" {...a11yProps(0)} />
+          <Tab label="Mest populære" data-cy = "tab2" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -103,6 +103,7 @@ function SimpleTabs(props) {
                     color="inherit"
                     aria-label="shopping-cart"
                     onClick={props.openDialog}
+                    data-cy = "shopping"
                   >
                     <ShoppingCartIcon />
                   </IconButton>

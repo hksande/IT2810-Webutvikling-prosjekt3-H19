@@ -90,6 +90,7 @@ function FilterMenu(props) {
           onClick={handleClick}
           endIcon={<Filter_List />}
           size="large"
+          data-cy = 'drop'
         >
           {activeFilter}
         </Button>
@@ -100,6 +101,7 @@ function FilterMenu(props) {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        data-cy= 'shopping'
       >
         {FILTER_LIST.map((el, index) => {
           return (
