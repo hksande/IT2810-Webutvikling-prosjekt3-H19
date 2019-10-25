@@ -100,6 +100,10 @@ export default function ControlledExpansionPanels(props) {
                   <b>Smak: </b>
                   <i>{el.description}</i>
                 </p>
+                <p className="product-purchased">
+                  <b>Antall kjøpt: </b>
+                  {el.purchased}
+                </p>
               </div>
             </ExpansionPanelDetails>
           </ExpansionPanel>

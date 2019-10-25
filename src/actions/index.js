@@ -4,7 +4,8 @@ import {
   SET_ORDER_BY,
   SET_SEARCH,
   SET_TYPE_FILTER,
-  SET_PAGE
+  SET_PAGE,
+  STOP_REFETCH
 } from "../constants/actionTypes";
 
 export function changeCount(payload) {
@@ -29,4 +30,8 @@ export function setTypeFilter(payload) {
 
 export function setPage(payload) {
   return { type: SET_PAGE, payload };
+}
+
+export function stopRefetch() {
+  return { type: STOP_REFETCH };
 }

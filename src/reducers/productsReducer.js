@@ -1,11 +1,13 @@
 import {
   CHANGE_COUNT,
-  RESET_COUNT
+  RESET_COUNT,
+  STOP_REFETCH
 } from "../constants/actionTypes";
 
 const defaultState = {
   count: 0,
-  drinks: {}
+  drinks: {},
+  refetch: false
 };
 
 const productsReducer = (state = defaultState, action) => {
@@ -30,7 +32,9 @@ const productsReducer = (state = defaultState, action) => {
         };
       }
     case RESET_COUNT:
-      return defaultState;
+      return { ...defaultState, refetch: true };
+    case STOP_REFETCH:
+      return { ...state, refetch: false };
     default:
       return state;
   }
