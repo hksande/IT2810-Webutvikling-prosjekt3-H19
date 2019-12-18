@@ -2,6 +2,10 @@
 
 > Gruppe 24 | Prosjekt 3 | IT2810 Webutvikling 2019
 
+<img src="./Skjermbilde 2019-11-05 kl. 17.56.57.png" height="300">
+<img src="./Skjermbilde 2019-11-05 kl. 17.58.17.png" height="300">
+<img src="./Skjermbilde 2019-11-05 kl. 17.58.38.png" height="300">
+                                                               
 ## Introduksjon
 
 _Av Johanne Lie, Mathilde Tillman Hegdal og Hans Kristian Sande_
