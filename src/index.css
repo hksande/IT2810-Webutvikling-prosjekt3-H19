@@ -172,7 +172,7 @@ ol li:hover {
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
-  background-image: url("/background.jpg");
+  background-image: url("./background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   height: 50vh;
